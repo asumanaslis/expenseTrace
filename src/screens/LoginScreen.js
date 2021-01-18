@@ -1,8 +1,16 @@
-import React from "react";
-import { View, Text, StyleSheet, ImageBackground, Image } from "react-native";
+import React, { useState } from "react";
+import { Platform } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  ImageBackground,
+  TextInput,
+  KeyboardAvoidingView,
+} from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AuthInput from "../components/AuthInput";
 import LogoTouchable from "../components/LogoTouchable";
+import { firebase } from "../firebase/config";
 
 const background = require("../../assets/background.png");
 const google_logo = require("../../assets/google-logo.png");
@@ -10,34 +18,83 @@ const apple_logo = require("../../assets/apple-logo.png");
 const fb_logo = require("../../assets/fb-logo.png");
 
 const LoginScreen = ({ navigation }) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const onLoginPress = () => {
+    if (email === "" || password == "") {
+      // In case, password or email is empty
+      alert("Enter details to login!");
+    } else {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(email, password)
+        .then((response) => {
+          navigation.navigate("Home");
+        })
+        .catch((error) => {
+          alert(error);
+        });
+    }
+  };
+
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground source={background} style={styles.background}>
         <View style={{ marginTop: "20%" }}></View>
-        <Text style={styles.loginText}>Login</Text>
-        <AuthInput inputLabel="Email" />
-        <AuthInput inputLabel="Password" />
+
+        <KeyboardAvoidingView
+          behavior={Platform.OS == "ios" ? "padding" : "height"}
+        >
+          {/* Login Text and Text Inputs */}
+          <Text style={styles.loginText}>Login</Text>
+
+          {/* Email Input */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Email</Text>
+            <TextInput
+              style={styles.input}
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={email}
+              onChangeText={(newEmail) => setEmail(newEmail)}
+            />
+          </View>
+
+          {/* Password Input */}
+          <View style={styles.inputContainer}>
+            <Text style={styles.inputText}>Password</Text>
+            <TextInput
+              secureTextEntry
+              style={styles.input}
+              autoCapitalize="none"
+              autoCorrect={false}
+              value={password}
+              onChangeText={(newPassword) => setPassword(newPassword)}
+            />
+          </View>
+        </KeyboardAvoidingView>
+
+        {/* Forget Password? Touchable Label */}
         <TouchableOpacity>
           <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
         </TouchableOpacity>
+
         {/* View of Logo Buttons */}
         <View horizontal style={styles.containerLogo}>
           <LogoTouchable logo={google_logo} />
           <LogoTouchable logo={fb_logo} />
           <LogoTouchable logo={apple_logo} />
         </View>
+
         {/* Login Button */}
         <View style={styles.loginContainer}>
-          <TouchableOpacity
-            style={styles.loginButton}
-            onPress={() => {
-              console.log("Login Button Pressed");
-            }}
-          >
+          <TouchableOpacity style={styles.loginButton} onPress={onLoginPress}>
             <Text style={styles.buttonText}>Login</Text>
           </TouchableOpacity>
         </View>
-        {/* navRegister -> New Here? Register Button. */}
+
+        {/* navToRegister -> New Here? Register Button. */}
         <View style={styles.navRegisterContainer}>
           <TouchableOpacity
             onPress={() => {
@@ -115,6 +172,21 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginLeft: 25,
     marginBottom: 30,
+  },
+  inputContainer: {
+    marginTop: 25,
+    marginLeft: 25,
+  },
+  input: {
+    borderWidth: 1,
+    borderColor: "#2F52E0",
+    borderRadius: 10,
+    width: "80%",
+    height: 35,
+  },
+  inputText: {
+    color: "#2F52E0",
+    fontSize: 14,
   },
 });
 

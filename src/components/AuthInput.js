@@ -1,3 +1,7 @@
+/*
+Şu an kullanımda değil
+*/
+
 import React from "react";
 import { Text, StyleSheet, TextInput, View } from "react-native";
 
