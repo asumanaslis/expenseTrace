@@ -5,15 +5,18 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
+  Image,
 } from "react-native";
 
-const image = require("../../assets/background.png");
+const background = require("../../assets/background.png");
+const logo = require("../../assets/logo.png");
 
 const WelcomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <ImageBackground source={image} style={styles.background}>
+      <ImageBackground source={background} style={styles.background}>
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
+          <Image source={logo} style={styles.logo} />
           <TouchableOpacity
             style={styles.button}
             onPress={() => {
@@ -43,14 +46,19 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
   },
+  logo: {
+    marginBottom: 200,
+    marginLeft: 80,
+  },
   button: {
     width: "40%",
     height: 50,
+    width: 130,
     alignSelf: "flex-end",
     borderWidth: 1,
     borderColor: "white",
     borderRadius: 5,
-    marginBottom: 20,
+    marginBottom: 40,
     marginRight: 20,
   },
   buttonText: {
