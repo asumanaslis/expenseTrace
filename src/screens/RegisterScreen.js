@@ -23,7 +23,7 @@ const RegisterScreen = ({ navigation }) => {
       .createUserWithEmailAndPassword(email, password)
       .then((response) => {
         const uid = response.user.uid;
-        const data = {
+        const user = {
           id: uid,
           email,
           name,
@@ -32,9 +32,9 @@ const RegisterScreen = ({ navigation }) => {
           .firestore()
           .collection("users")
           .doc(uid)
-          .set(data)
+          .set(user)
           .then(() => {
-            navigation.navigate("Home", { user: data });
+            navigation.navigate("Home", { user });
           })
           .catch((error) => {
             const { code, message } = error;

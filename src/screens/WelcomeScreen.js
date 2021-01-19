@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   ImageBackground,
   View,
@@ -7,11 +7,32 @@ import {
   Text,
   Image,
 } from "react-native";
+import { firebase } from "../firebase/config";
 
 const background = require("../../assets/background.png");
 const logo = require("../../assets/logo.png");
 
 const WelcomeScreen = ({ navigation }) => {
+  useEffect(() => {
+    const usersRef = firebase.firestore().collection("users");
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        usersRef
+          .doc(user.uid)
+          .get()
+          .then((document) => {
+            const user = document.data();
+            navigation.navigate("Home", user);
+          })
+          .catch((error) => {
+            return;
+          });
+      } else {
+        return;
+      }
+    });
+  }, []);
+
   return (
     <View style={styles.container}>
       <ImageBackground source={background} style={styles.background}>

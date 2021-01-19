@@ -1,5 +1,5 @@
 /*
-Şu an kullanımda değil
+Şu an kullanımda değil, Login ve Register kısmındaki kod tekrarını önlemek için düzenleyeceğim.
 */
 
 import React from "react";

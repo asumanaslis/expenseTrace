@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { Platform } from "react-native";
 import {
   View,
   Text,
@@ -7,6 +6,7 @@ import {
   ImageBackground,
   TextInput,
   KeyboardAvoidingView,
+  Platform,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import LogoTouchable from "../components/LogoTouchable";
@@ -30,7 +30,22 @@ const LoginScreen = ({ navigation }) => {
         .auth()
         .signInWithEmailAndPassword(email, password)
         .then((response) => {
-          navigation.navigate("Home");
+          const uid = response.user.uid;
+          const usersRef = firebase.firestore().collection("users");
+          usersRef
+            .doc(uid)
+            .get()
+            .then((firestoreDocument) => {
+              if (!firestoreDocument.exists) {
+                alert("User does not exist anymore.");
+                return;
+              }
+              const user = firestoreDocument.data();
+              navigation.navigate("Home", { user });
+            })
+            .catch((error) => {
+              alert(error);
+            });
         })
         .catch((error) => {
           alert(error);

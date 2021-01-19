@@ -17,3 +17,16 @@ if (!firebase.apps.length) {
 }
 
 export { firebase };
+
+/*
+ANDROID
+const firebaseConfig = {
+  apiKey: "AIzaSyAqgh66yYaMNGJyKtxNamP8aaVzcWhO6u8",
+  authDomain: "expensetrace-4212b.firebaseapp.com",
+  databaseURL: "https://expensetrace-4212b.firebaseio.com",
+  projectId: "expensetrace-4212b",
+  storageBucket: "expensetrace-4212b.appspot.com",
+  messagingSenderId: "357863128436",
+  appId: "1:357863128436:android:1e1194cdb2da51b4e3c021",
+};
+*/
