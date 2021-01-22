@@ -13,14 +13,12 @@ import LogoTouchable from "../components/LogoTouchable";
 import { firebase } from "../firebase/config";
 
 const background = require("../../assets/background.png");
-const google_logo = require("../../assets/google-logo.png");
-const apple_logo = require("../../assets/apple-logo.png");
-const fb_logo = require("../../assets/fb-logo.png");
 
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  // Login with Firebase
   const onLoginPress = () => {
     if (email === "" || password == "") {
       // In case, password or email is empty
@@ -97,9 +95,9 @@ const LoginScreen = ({ navigation }) => {
 
         {/* View of Logo Buttons */}
         <View horizontal style={styles.containerLogo}>
-          <LogoTouchable logo={google_logo} />
-          <LogoTouchable logo={fb_logo} />
-          <LogoTouchable logo={apple_logo} />
+          <LogoTouchable signInMethod="Google" />
+          <LogoTouchable signInMethod="Facebook" />
+          {Platform.OS == "ios" ? <LogoTouchable signInMethod="Apple" /> : null}
         </View>
 
         {/* Login Button */}

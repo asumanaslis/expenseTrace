@@ -9,6 +9,7 @@ import {
   KeyboardAvoidingView,
 } from "react-native";
 import { firebase } from "../firebase/config";
+import LogoTouchable from "../components/LogoTouchable";
 
 const background = require("../../assets/background.png");
 
@@ -51,7 +52,7 @@ const RegisterScreen = ({ navigation }) => {
   return (
     <View style={{ flex: 1 }}>
       <ImageBackground source={background} style={styles.background}>
-        <View style={{ marginTop: "20%" }}></View>
+        <View style={{ marginTop: "30%" }}></View>
 
         <KeyboardAvoidingView
           behavior={Platform.OS == "ios" ? "padding" : "height"}
@@ -96,6 +97,13 @@ const RegisterScreen = ({ navigation }) => {
             />
           </View>
         </KeyboardAvoidingView>
+
+        {/* Google Facebook Apple Sign In */}
+        <View horizontal style={styles.containerLogo}>
+          <LogoTouchable signInMethod="Google" />
+          <LogoTouchable signInMethod="Facebook" />
+          {Platform.OS == "ios" ? <LogoTouchable signInMethod="Apple" /> : null}
+        </View>
 
         {/* Register Button */}
         <View style={styles.registerContainer}>
@@ -197,6 +205,12 @@ const styles = StyleSheet.create({
   inputText: {
     color: "#2F52E0",
     fontSize: 14,
+  },
+  containerLogo: {
+    justifyContent: "flex-start",
+    marginLeft: 25,
+    flexDirection: "row",
+    paddingTop: 10,
   },
 });
 
