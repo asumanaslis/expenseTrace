@@ -1,11 +1,8 @@
-/*
-Şu an kullanımda değil, Login ve Register kısmındaki kod tekrarını önlemek için düzenleyeceğim.
-*/
-
 import React from "react";
 import { Text, StyleSheet, TextInput, View } from "react-native";
+import { BLUE } from "../styles/colors";
 
-const AuthInput = ({ inputLabel }) => {
+const AuthInput = ({ inputLabel, ...props }) => {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>{inputLabel}</Text>
@@ -13,6 +10,7 @@ const AuthInput = ({ inputLabel }) => {
         style={styles.textInput}
         autoCapitalize="none"
         autoCorrect={false}
+        {...props}
       />
     </View>
   );
@@ -25,13 +23,13 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderWidth: 1,
-    borderColor: "#2F52E0",
+    borderColor: BLUE,
     borderRadius: 10,
     width: "80%",
     height: 35,
   },
   text: {
-    color: "#2F52E0",
+    color: BLUE,
     fontSize: 14,
   },
 });

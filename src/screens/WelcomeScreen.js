@@ -6,8 +6,10 @@ import {
   TouchableOpacity,
   Text,
   Image,
+  Platform,
 } from "react-native";
 import { firebase } from "../firebase/config";
+import { WHITE } from "../styles/colors";
 
 const background = require("../../assets/background.png");
 const logo = require("../../assets/logo.png");
@@ -68,22 +70,23 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    marginBottom: 200,
-    marginLeft: 80,
+    marginRight: "20%",
+    alignSelf: "center",
+    justifyContent: "center",
+    marginBottom: "40%",
   },
   button: {
     width: "40%",
-    height: 50,
-    width: 130,
+    height: Platform.OS == "ios" ? "5.5%" : "7%",
     alignSelf: "flex-end",
     borderWidth: 1,
-    borderColor: "white",
+    borderColor: WHITE,
     borderRadius: 5,
     marginBottom: 40,
     marginRight: 20,
   },
   buttonText: {
-    color: "white",
+    color: WHITE,
     fontSize: 24,
     alignSelf: "center",
     padding: 5,

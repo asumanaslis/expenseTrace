@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import * as Google from "expo-google-app-auth";
 import { firebase } from "../firebase/config";
+import * as Facebook from "expo-facebook";
 
 const google_logo = require("../../assets/google-logo.png");
 const apple_logo = require("../../assets/apple-logo.png");
@@ -15,6 +16,8 @@ const LogoTouchable = ({ signInMethod }) => {
   };
 
   const logo = logoCases[signInMethod];
+
+  // SIGN IN WITH GOOGLE, FACEBOOK, APPLE
 
   const onSignInPressed = () => {
     if (signInMethod === "Google") {
@@ -36,10 +39,7 @@ const LogoTouchable = ({ signInMethod }) => {
         return false;
       };
 
-      //  SIGN IN WITH GOOGLE, FACEBOOK, APPLE
-
       const onSignIn = (googleUser) => {
-        // console.log("Google Auth Response", googleUser);
         // We need to register an Observer on Firebase Auth to make sure auth is initialized.
         var unsubscribe = firebase.auth().onAuthStateChanged((firebaseUser) => {
           unsubscribe();
@@ -86,7 +86,6 @@ const LogoTouchable = ({ signInMethod }) => {
 
           if (result.type === "success") {
             onSignIn(result);
-            // console.log(result);
           } else {
             return { cancelled: true };
           }
@@ -97,7 +96,42 @@ const LogoTouchable = ({ signInMethod }) => {
 
       signInWithGoogle();
     } else if (signInMethod === "Facebook") {
-      return console.log("facebook");
+      const onFacebookLoginPress = async () => {
+        try {
+          await Facebook.initializeAsync({
+            appId: "422581495718758",
+          });
+          const result = await Facebook.logInWithReadPermissionsAsync({
+            permissions: ["public_profile", "email"],
+          });
+
+          if (result.type === "success") {
+            const credential = firebase.auth.FacebookAuthProvider.credential(
+              result.token
+            );
+
+            const userCredential = await firebase
+              .auth()
+              .signInWithCredential(credential)
+              .then((resp) => {
+                const user = {
+                  name: resp.user.displayName,
+                  email: resp.user.email,
+                  id: resp.user.uid,
+                };
+                firebase.firestore().collection("users").doc(user.id).set(user);
+              })
+              .catch((err) => {
+                alert(err);
+              });
+          } else {
+            // type === 'cancel'
+          }
+        } catch (err) {
+          alert(err);
+        }
+      };
+      onFacebookLoginPress();
     } else if (signInMethod === "Apple") {
       return console.log("apple");
     }
