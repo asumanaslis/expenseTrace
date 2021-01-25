@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet, TouchableOpacity, TouchableWithoutFeedback, Text, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { Color } from './assets/colors';
-
+import { StyleVariables } from './styleVariable/StyleVariable'
 
 export default class BottomNavigator extends Component {
     toggleOpen = () => { alert("sa") }
@@ -13,18 +13,18 @@ export default class BottomNavigator extends Component {
                 <View style={styles.buttonSettings}>
                     <TouchableWithoutFeedback onPress={this.toggleOpen}>
                         <View style={[styles.button, styles.actionBtn]}>
-                            <Ionicons name="add" size={32} color={Color.backgroundColor} />
+                            <Ionicons name="add" size={45} color={Color.backgroundColor} style={{ marginLeft: 3 }} />
                         </View>
                     </TouchableWithoutFeedback>
                 </View>
 
                 <View style={styles.buttonBarSettings}>
-                    <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'center', marginRight: 70 }}>
+                    <View style={styles.icons}>
                         <TouchableOpacity onPress={() => { Alert.alert('click') }}>
                             <Ionicons name="person-outline" size={32} color={Color.buttonColor} />
                         </TouchableOpacity>
                     </View>
-                    <View style={{ flexDirection: 'column', alignItems: 'center', justifyContent: 'flex-end', }}>
+                    <View style={styles.icons}>
                         <TouchableOpacity
                             onPress={() => { Alert.alert("click") }}
                         >
@@ -47,10 +47,10 @@ const styles = StyleSheet.create({
     buttonSettings: {
         position: 'absolute',
         alignSelf: 'center',
-        width: 70,
-        height: 70,
-        borderRadius: 35,
-        bottom: 35,
+        width: StyleVariables.width * 0.17,
+        height: StyleVariables.width * 0.17,
+        borderRadius: 40,
+        bottom: StyleVariables.width * 0.09,
         zIndex: 10
     },
     buttonBarSettings: {
@@ -58,13 +58,13 @@ const styles = StyleSheet.create({
         backgroundColor: Color.gray,
         bottom: 0,
         width: '100%',
-        height: 70,
+        height: StyleVariables.width * 0.17,
         flexDirection: 'row',
         justifyContent: 'space-around',
-        paddingVertical: 10,
-        paddingHorizontal: 25,
-        borderTopEndRadius: 15,
-        borderTopStartRadius: 15
+        paddingVertical: StyleVariables.width * 0.010,
+        paddingHorizontal: StyleVariables.width * 0.010,
+        borderTopEndRadius: StyleVariables.width * 0.050,
+        borderTopStartRadius: StyleVariables.width * 0.050
     },
     MainContainer: {
         flex: 1,
@@ -72,16 +72,18 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     button: {
-        width: 60,
-        height: 60,
+        width: StyleVariables.width * 0.18,
+        height: StyleVariables.width * 0.18,
         alignItems: 'center',
         justifyContent: 'center',
-        borderRadius: 30,
+        borderRadius: 50,
         position: 'absolute',
-        top: 5,
-        left: 5,
     },
     actionBtn: {
         backgroundColor: Color.buttonColor,
+    },
+    icons: {
+        alignItems: 'center',
+        flexDirection: "row"
     }
 });
