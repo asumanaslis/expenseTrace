@@ -5,13 +5,14 @@ import {
   StyleSheet,
   ImageBackground,
   TouchableOpacity,
-  TextInput,
   KeyboardAvoidingView,
 } from "react-native";
 import { firebase } from "../firebase/config";
-import LogoTouchable from "../components/LogoTouchable";
-import { WHITE, BLUE } from "../styles/colors";
+import AuthLogoButton from "../components/AuthLogoButton";
+import { WHITE } from "../styles/colors";
 import AuthInput from "../components/AuthInput";
+import { customStyles } from "../styles/customStyles";
+import AuthButton from "../components/AuthButton";
 
 const background = require("../../assets/background.png");
 
@@ -62,7 +63,7 @@ const RegisterScreen = ({ navigation }) => {
           {/* Full Name Input */}
           <View style={styles.registerContainer}>
             {/* Register Label */}
-            <Text style={styles.registerText}>Register</Text>
+            <Text style={customStyles.title}>Register</Text>
 
             {/* Full Name Input */}
             <AuthInput
@@ -96,22 +97,15 @@ const RegisterScreen = ({ navigation }) => {
 
         {/* Google Facebook Apple Sign In */}
         <View horizontal style={styles.containerLogo}>
-          <LogoTouchable signInMethod="Google" />
-          <LogoTouchable signInMethod="Facebook" />
-          {Platform.OS == "ios" ? <LogoTouchable signInMethod="Apple" /> : null}
+          <AuthLogoButton signInMethod="Google" />
+          <AuthLogoButton signInMethod="Facebook" />
+          {Platform.OS == "ios" ? (
+            <AuthLogoButton signInMethod="Apple" />
+          ) : null}
         </View>
 
         {/* Register Button */}
-        <View style={styles.registerButtonContainer}>
-          <TouchableOpacity
-            style={styles.registerButton}
-            onPress={() => {
-              onRegisterPress();
-            }}
-          >
-            <Text style={styles.buttonText}>Register</Text>
-          </TouchableOpacity>
-        </View>
+        <AuthButton text="Register" onPress={onRegisterPress} />
 
         {/* navToLogin -> Already member? Login */}
         <View style={styles.navRegisterContainer}>
@@ -142,43 +136,6 @@ const styles = StyleSheet.create({
     flex: 1,
     resizeMode: "cover",
     justifyContent: "center",
-  },
-  loginText: {
-    paddingTop: 50,
-    fontSize: 36,
-    marginLeft: 25,
-    color: BLUE,
-    fontWeight: "700",
-  },
-  registerText: {
-    paddingTop: 50,
-    fontSize: 36,
-    marginLeft: 25,
-    color: BLUE,
-    fontWeight: "700",
-  },
-  registerButtonContainer: {
-    flexDirection: "row",
-    position: "absolute",
-    alignItems: "flex-end",
-    justifyContent: "center",
-    bottom: 0,
-    right: 0,
-  },
-  registerButton: {
-    height: 50,
-    width: 120,
-    borderWidth: 1,
-    borderColor: WHITE,
-    borderRadius: 5,
-    marginBottom: 40,
-    marginRight: 20,
-  },
-  buttonText: {
-    color: WHITE,
-    fontSize: 24,
-    alignSelf: "center",
-    padding: 5,
   },
   navRegisterContainer: {
     position: "absolute",

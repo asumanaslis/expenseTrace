@@ -4,15 +4,16 @@ import {
   Text,
   StyleSheet,
   ImageBackground,
-  TextInput,
   KeyboardAvoidingView,
   Platform,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import LogoTouchable from "../components/LogoTouchable";
+import AuthLogoButton from "../components/AuthLogoButton";
 import { firebase } from "../firebase/config";
 import { WHITE, BLUE } from "../styles/colors";
 import AuthInput from "../components/AuthInput";
+import { customStyles } from "../styles/customStyles";
+import AuthButton from "../components/AuthButton";
 
 const background = require("../../assets/background.png");
 
@@ -63,7 +64,7 @@ const LoginScreen = ({ navigation }) => {
         >
           {/* Login Text and Text Inputs */}
           <View style={styles.inputContainer}>
-            <Text style={styles.loginText}>Login</Text>
+            <Text style={customStyles.title}>Login</Text>
 
             {/* Email Input */}
             <AuthInput
@@ -97,17 +98,15 @@ const LoginScreen = ({ navigation }) => {
 
         {/* View of Logo Buttons */}
         <View horizontal style={styles.containerLogo}>
-          <LogoTouchable signInMethod="Google" />
-          <LogoTouchable signInMethod="Facebook" />
-          {Platform.OS == "ios" ? <LogoTouchable signInMethod="Apple" /> : null}
+          <AuthLogoButton signInMethod="Google" />
+          <AuthLogoButton signInMethod="Facebook" />
+          {Platform.OS == "ios" ? (
+            <AuthLogoButton signInMethod="Apple" />
+          ) : null}
         </View>
 
         {/* Login Button */}
-        <View style={styles.loginContainer}>
-          <TouchableOpacity style={styles.loginButton} onPress={onLoginPress}>
-            <Text style={styles.buttonText}>Login</Text>
-          </TouchableOpacity>
-        </View>
+        <AuthButton text="Login" onPress={onLoginPress} />
 
         {/* navToRegister -> New Here? Register Button. */}
         <View style={styles.navRegisterContainer}>
@@ -139,13 +138,6 @@ const styles = StyleSheet.create({
     resizeMode: "cover",
     justifyContent: "center",
   },
-  loginText: {
-    paddingTop: 50,
-    fontSize: 36,
-    marginLeft: 25,
-    color: BLUE,
-    fontWeight: "700",
-  },
   forgotPasswordText: {
     color: BLUE,
     fontWeight: "700",
@@ -157,29 +149,6 @@ const styles = StyleSheet.create({
     justifyContent: "flex-start",
     marginLeft: 25,
     flexDirection: "row",
-  },
-  loginContainer: {
-    flexDirection: "row",
-    position: "absolute",
-    alignItems: "flex-end",
-    justifyContent: "center",
-    bottom: 0,
-    right: 0,
-  },
-  loginButton: {
-    height: 50,
-    width: 120,
-    borderWidth: 1,
-    borderColor: WHITE,
-    borderRadius: 5,
-    marginBottom: 40,
-    marginRight: 20,
-  },
-  buttonText: {
-    color: WHITE,
-    fontSize: 24,
-    alignSelf: "center",
-    padding: 5,
   },
   navRegisterContainer: {
     position: "absolute",

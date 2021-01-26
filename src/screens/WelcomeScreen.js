@@ -1,20 +1,13 @@
 import React, { useEffect } from "react";
-import {
-  ImageBackground,
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Image,
-  Platform,
-} from "react-native";
+import { ImageBackground, View, StyleSheet, Image } from "react-native";
 import { firebase } from "../firebase/config";
-import { WHITE } from "../styles/colors";
+import AuthButton from "../components/AuthButton";
 
 const background = require("../../assets/background.png");
 const logo = require("../../assets/logo.png");
 
 const WelcomeScreen = ({ navigation }) => {
+  // Firebase Authentication State Persistence
   useEffect(() => {
     const usersRef = firebase.firestore().collection("users");
     firebase.auth().onAuthStateChanged((user) => {
@@ -40,14 +33,12 @@ const WelcomeScreen = ({ navigation }) => {
       <ImageBackground source={background} style={styles.background}>
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
           <Image source={logo} style={styles.logo} />
-          <TouchableOpacity
-            style={styles.button}
+          <AuthButton
+            text="Get Started"
             onPress={() => {
               navigation.navigate("Login");
             }}
-          >
-            <Text style={styles.buttonText}>Get Started</Text>
-          </TouchableOpacity>
+          />
         </View>
       </ImageBackground>
     </View>
@@ -74,22 +65,6 @@ const styles = StyleSheet.create({
     alignSelf: "center",
     justifyContent: "center",
     marginBottom: "40%",
-  },
-  button: {
-    width: "40%",
-    height: Platform.OS == "ios" ? "5.5%" : "7%",
-    alignSelf: "flex-end",
-    borderWidth: 1,
-    borderColor: WHITE,
-    borderRadius: 5,
-    marginBottom: 40,
-    marginRight: 20,
-  },
-  buttonText: {
-    color: WHITE,
-    fontSize: 24,
-    alignSelf: "center",
-    padding: 5,
   },
 });
 

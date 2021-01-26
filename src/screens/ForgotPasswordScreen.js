@@ -4,12 +4,12 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
-  TextInput,
   Text,
   Image,
 } from "react-native";
-import { WHITE, BLUE } from "../styles/colors";
 import AuthInput from "../components/AuthInput";
+import { customStyles } from "../styles/customStyles";
+import AuthButton from "../components/AuthButton";
 
 const background = require("../../assets/background.png");
 const arrow_icon = require("../../assets/arrow-icon.png");
@@ -32,26 +32,22 @@ const ForgotPasswordScreen = ({ navigation }) => {
         </View>
 
         {/* Reset Password Label */}
-        <Text style={styles.resetPasswordText}>Reset Password</Text>
+        <Text style={customStyles.title}>Reset Password</Text>
 
         {/* Input Box */}
-
         <AuthInput
           inputLabel="Enter Email"
           value={email}
           onChangeText={(newEmail) => setEmail(newEmail)}
         />
+
         {/* Send Request Button */}
-        <View style={styles.sendReqContainer}>
-          <TouchableOpacity
-            style={styles.sendReqButton}
-            onPress={() => {
-              alert(email);
-            }}
-          >
-            <Text style={styles.buttonText}>Send Request</Text>
-          </TouchableOpacity>
-        </View>
+        <AuthButton
+          text="Send Request"
+          onPress={() => {
+            alert(email);
+          }}
+        />
       </ImageBackground>
     </View>
   );
@@ -81,44 +77,6 @@ const styles = StyleSheet.create({
     width: 25,
     height: 20,
     resizeMode: "contain",
-  },
-  input: {
-    borderWidth: 1,
-    borderColor: BLUE,
-    borderRadius: 10,
-    width: "80%",
-    height: 35,
-  },
-
-  sendReqContainer: {
-    flexDirection: "row",
-    position: "absolute",
-    alignItems: "flex-end",
-    justifyContent: "center",
-    bottom: 0,
-    right: 0,
-  },
-  sendReqButton: {
-    height: 50,
-    width: 170,
-    borderWidth: 1,
-    borderColor: WHITE,
-    borderRadius: 5,
-    marginBottom: 40,
-    marginRight: 20,
-  },
-  buttonText: {
-    color: WHITE,
-    fontSize: 24,
-    alignSelf: "center",
-    padding: 5,
-  },
-  resetPasswordText: {
-    paddingTop: 50,
-    fontSize: 36,
-    marginLeft: 25,
-    color: BLUE,
-    fontWeight: "700",
   },
 });
 

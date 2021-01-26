@@ -1,3 +1,7 @@
+/*
+Google, Facebook and Apple Buttons for Login and Register screens
+*/
+
 import React from "react";
 import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
 import * as Google from "expo-google-app-auth";
@@ -8,7 +12,7 @@ const google_logo = require("../../assets/google-logo.png");
 const apple_logo = require("../../assets/apple-logo.png");
 const fb_logo = require("../../assets/fb-logo.png");
 
-const LogoTouchable = ({ signInMethod }) => {
+const AuthLogoButton = ({ signInMethod }) => {
   const logoCases = {
     Google: google_logo,
     Facebook: fb_logo,
@@ -155,4 +159,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default LogoTouchable;
+export default AuthLogoButton;
