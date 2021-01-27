@@ -6,16 +6,37 @@ import {
   ImageBackground,
   Text,
   Image,
+  Alert,
 } from "react-native";
 import AuthInput from "../components/AuthInput";
 import { customStyles } from "../styles/customStyles";
 import AuthButton from "../components/AuthButton";
+import { firebase } from "../firebase/config";
 
 const background = require("../../assets/background.png");
 const arrow_icon = require("../../assets/arrow-icon.png");
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
+
+  // Firebase: Send Password Reset
+  const onSendRequestPress = () => {
+    firebase
+      .auth()
+      .sendPasswordResetEmail(email)
+      .then(() => {
+        Alert.alert("Please check your email...", null, [
+          {
+            text: "OK",
+            onPress: () => navigation.navigate("Login"),
+            style: "cancel",
+          },
+        ]);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
 
   return (
     <View style={{ flex: 1 }}>
@@ -42,12 +63,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
         />
 
         {/* Send Request Button */}
-        <AuthButton
-          text="Send Request"
-          onPress={() => {
-            alert(email);
-          }}
-        />
+        <AuthButton text="Send Request" onPress={onSendRequestPress} />
       </ImageBackground>
     </View>
   );
