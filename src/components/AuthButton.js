@@ -8,10 +8,10 @@ import {
 } from "react-native";
 import { WHITE } from "../styles/colors";
 
-const AuthButton = ({ text, ...props }) => {
+const AuthButton = ({ text, loading, ...props }) => {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity {...props}>
+    <View style={styles.container} opacity={loading ? 0.2 : 1}>
+      <TouchableOpacity disabled={loading} {...props}>
         <Text style={styles.text}>{text}</Text>
       </TouchableOpacity>
     </View>

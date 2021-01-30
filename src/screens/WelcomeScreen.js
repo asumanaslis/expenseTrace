@@ -1,12 +1,21 @@
-import React, { useEffect } from "react";
-import { ImageBackground, View, StyleSheet, Image } from "react-native";
+import React, { useEffect, useState } from "react";
+import {
+  ImageBackground,
+  View,
+  StyleSheet,
+  Image,
+  ActivityIndicator,
+} from "react-native";
 import { firebase } from "../firebase/config";
 import AuthButton from "../components/AuthButton";
+import { customStyles } from "../styles/customStyles";
 
 const background = require("../../assets/background.png");
 const logo = require("../../assets/logo.png");
 
 const WelcomeScreen = ({ navigation }) => {
+  const [isLoading, setIsLoading] = useState(true);
+
   // Firebase Authentication State Persistence
   useEffect(() => {
     const usersRef = firebase.firestore().collection("users");
@@ -16,6 +25,7 @@ const WelcomeScreen = ({ navigation }) => {
           .doc(user.uid)
           .get()
           .then((document) => {
+            setIsLoading(false);
             const user = document.data();
             navigation.navigate("Home", user);
           })
@@ -23,6 +33,7 @@ const WelcomeScreen = ({ navigation }) => {
             return;
           });
       } else {
+        setIsLoading(false);
         return;
       }
     });
@@ -32,9 +43,16 @@ const WelcomeScreen = ({ navigation }) => {
     <View style={styles.container}>
       <ImageBackground source={background} style={styles.background}>
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
+          {isLoading ? (
+            <ActivityIndicator
+              size="large"
+              style={customStyles.loadingIndicator}
+            />
+          ) : null}
           <Image source={logo} style={styles.logo} />
           <AuthButton
             text="Get Started"
+            loading={isLoading}
             onPress={() => {
               navigation.navigate("Login");
             }}

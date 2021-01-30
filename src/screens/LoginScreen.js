@@ -6,6 +6,7 @@ import {
   ImageBackground,
   KeyboardAvoidingView,
   Platform,
+  ActivityIndicator,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AuthLogoButton from "../components/AuthLogoButton";
@@ -20,6 +21,7 @@ const background = require("../../assets/background.png");
 const LoginScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Login with Firebase
   const onLoginPress = () => {
@@ -27,6 +29,7 @@ const LoginScreen = ({ navigation }) => {
       // In case, password or email is empty
       alert("Enter details to login!");
     } else {
+      setIsLoading(true);
       firebase
         .auth()
         .signInWithEmailAndPassword(email, password)
@@ -43,12 +46,15 @@ const LoginScreen = ({ navigation }) => {
               }
               const user = firestoreDocument.data();
               navigation.navigate("Home", { user });
+              setIsLoading(false);
             })
             .catch((error) => {
+              setIsLoading(false);
               alert(error);
             });
         })
         .catch((error) => {
+          setIsLoading(false);
           alert(error);
         });
     }
@@ -58,6 +64,13 @@ const LoginScreen = ({ navigation }) => {
     <View style={{ flex: 1 }}>
       <ImageBackground source={background} style={styles.background}>
         <View style={{ marginTop: "20%" }}></View>
+
+        {isLoading ? (
+          <ActivityIndicator
+            size="large"
+            style={customStyles.loadingIndicator}
+          />
+        ) : null}
 
         <KeyboardAvoidingView
           behavior={Platform.OS == "ios" ? "padding" : "position"}
@@ -106,7 +119,7 @@ const LoginScreen = ({ navigation }) => {
         </View>
 
         {/* Login Button */}
-        <AuthButton text="Login" onPress={onLoginPress} />
+        <AuthButton text="Login" loading={isLoading} onPress={onLoginPress} />
 
         {/* navToRegister -> New Here? Register Button. */}
         <View style={styles.navRegisterContainer}>

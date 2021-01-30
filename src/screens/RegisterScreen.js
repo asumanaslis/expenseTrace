@@ -6,6 +6,7 @@ import {
   ImageBackground,
   TouchableOpacity,
   KeyboardAvoidingView,
+  ActivityIndicator,
 } from "react-native";
 import { firebase } from "../firebase/config";
 import AuthLogoButton from "../components/AuthLogoButton";
@@ -20,8 +21,10 @@ const RegisterScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const onRegisterPress = () => {
+    setIsLoading(true);
     firebase
       .auth()
       .createUserWithEmailAndPassword(email, password)
@@ -44,11 +47,13 @@ const RegisterScreen = ({ navigation }) => {
             const { code, message } = error;
             alert(error);
           });
+        setIsLoading(true);
       })
       .catch((error) => {
         // Email address already in use || The password must be 6 characters long or more.
         const { code, message } = error;
         alert(message);
+        setIsLoading(true);
       });
   };
 
@@ -57,10 +62,17 @@ const RegisterScreen = ({ navigation }) => {
       <ImageBackground source={background} style={styles.background}>
         <View style={{ marginTop: "30%" }}></View>
 
+        {isLoading ? (
+          <ActivityIndicator
+            size="large"
+            style={customStyles.loadingIndicator}
+          />
+        ) : null}
+
         <KeyboardAvoidingView
           behavior={Platform.OS == "ios" ? "padding" : "position"}
         >
-          {/* Full Name Input */}
+          {/* Register Container */}
           <View style={styles.registerContainer}>
             {/* Register Label */}
             <Text style={customStyles.title}>Register</Text>
@@ -105,7 +117,11 @@ const RegisterScreen = ({ navigation }) => {
         </View>
 
         {/* Register Button */}
-        <AuthButton text="Register" onPress={onRegisterPress} />
+        <AuthButton
+          text="Register"
+          loading={isLoading}
+          onPress={onRegisterPress}
+        />
 
         {/* navToLogin -> Already member? Login */}
         <View style={styles.navRegisterContainer}>
