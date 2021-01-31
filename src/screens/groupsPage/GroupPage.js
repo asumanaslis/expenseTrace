@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { Color } from '../../assets/colors'
 import Icon from 'react-native-vector-icons/Ionicons';
-
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { StyleVariables } from "../../styleVariable/StyleVariable"
 export default class GroupPage extends Component {
     render() {
         return (
@@ -19,7 +20,7 @@ export default class GroupPage extends Component {
                         </View>
                     </View>
                     <View style={styles.icon}>
-                        <Icon name="lock-closed-outline" size={30} color="black" ></Icon>
+                        <Icon name="lock-closed-outline" style={styles.iconStyle}  ></Icon>
                     </View>
                 </View>
 
@@ -34,7 +35,7 @@ export default class GroupPage extends Component {
                         </View>
                     </View>
                     <View style={styles.icon}>
-                        <Icon name="lock-closed-outline" size={30} color="black" ></Icon>
+                        <Icon name="lock-closed-outline" style={styles.iconStyle}  ></Icon>
                     </View>
                 </View>
 
@@ -47,10 +48,10 @@ const styles = StyleSheet.create({
     main: {
         flex: 1,
         color: Color.backgroundColor,
-        paddingTop: 30
+        paddingTop: StyleVariables.height * 0.04
     },
     mainTitleText: {
-        fontSize: 35,
+        fontSize: RFPercentage(5),
         fontWeight: "bold",
         flexDirection: "row",
         textAlign: 'center'
@@ -59,19 +60,19 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: Color.secondColor,
         flexDirection: "row",
-        marginTop: 20
+        marginTop: StyleVariables.height * 0.02
     },
     componentTexts: {
         flexDirection: "column",
-        paddingHorizontal: 20,
-        paddingVertical: 10
+        paddingHorizontal: StyleVariables.width * 0.05,
+        paddingVertical: StyleVariables.height * 0.01
     },
     titleText: {
-        fontSize: 23,
+        fontSize: RFPercentage(3.2),
         fontWeight: "bold"
     },
     subtitleText: {
-        fontSize: 16,
+        fontSize: RFPercentage(2),
         color: Color.secondColor,
         textAlignVertical: "bottom",
     },
@@ -79,12 +80,16 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     dateText: {
-        fontSize: 13,
+        fontSize: RFPercentage(1.8),
         fontWeight: "600"
     },
     icon: {
         flexDirection: "row",
         marginStart: 140,
         alignItems: "center"
+    },
+    iconStyle: {
+        fontSize: RFPercentage(4),
+        color: Color.textColor
     }
 })
