@@ -14,6 +14,7 @@ import { WHITE } from "../styles/colors";
 import AuthInput from "../components/AuthInput";
 import { customStyles } from "../styles/customStyles";
 import AuthButton from "../components/AuthButton";
+import { showAlert } from "../components/ShowAlert";
 
 const background = require("../../assets/background.png");
 
@@ -44,16 +45,15 @@ const RegisterScreen = ({ navigation }) => {
             navigation.navigate("Home", { user });
           })
           .catch((error) => {
-            const { code, message } = error;
-            alert(error);
+            showAlert(error);
           });
-        setIsLoading(true);
+        setIsLoading(false);
       })
       .catch((error) => {
         // Email address already in use || The password must be 6 characters long or more.
-        const { code, message } = error;
-        alert(message);
-        setIsLoading(true);
+        showAlert(error);
+
+        setIsLoading(false);
       });
   };
 

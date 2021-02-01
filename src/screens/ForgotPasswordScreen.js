@@ -13,6 +13,7 @@ import AuthInput from "../components/AuthInput";
 import { customStyles } from "../styles/customStyles";
 import AuthButton from "../components/AuthButton";
 import { firebase } from "../firebase/config";
+import { showAlert } from "../components/ShowAlert";
 
 const background = require("../../assets/background.png");
 const arrow_icon = require("../../assets/arrow-icon.png");
@@ -39,7 +40,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
       })
       .catch((err) => {
         setIsLoading(false);
-        alert(err);
+        showAlert(err);
       });
   };
 
