@@ -7,24 +7,29 @@ import {
   Text,
   Image,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import AuthInput from "../components/AuthInput";
 import { customStyles } from "../styles/customStyles";
 import AuthButton from "../components/AuthButton";
 import { firebase } from "../firebase/config";
+import { showAlert } from "../components/ShowAlert";
 
 const background = require("../../assets/background.png");
 const arrow_icon = require("../../assets/arrow-icon.png");
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   // Firebase: Send Password Reset
   const onSendRequestPress = () => {
+    setIsLoading(true);
     firebase
       .auth()
       .sendPasswordResetEmail(email)
       .then(() => {
+        setIsLoading(false);
         Alert.alert("Please check your email...", null, [
           {
             text: "OK",
@@ -34,7 +39,8 @@ const ForgotPasswordScreen = ({ navigation }) => {
         ]);
       })
       .catch((err) => {
-        alert(err);
+        setIsLoading(false);
+        showAlert(err);
       });
   };
 
@@ -43,6 +49,13 @@ const ForgotPasswordScreen = ({ navigation }) => {
       <ImageBackground source={background} style={styles.background}>
         {/* Go Back */}
         <View horizontal style={styles.goBackContainer}>
+          {isLoading ? (
+            <ActivityIndicator
+              size="large"
+              style={customStyles.loadingIndicator}
+            />
+          ) : null}
+
           <TouchableOpacity
             onPress={() => {
               navigation.navigate("Login");
@@ -63,7 +76,11 @@ const ForgotPasswordScreen = ({ navigation }) => {
         />
 
         {/* Send Request Button */}
-        <AuthButton text="Send Request" onPress={onSendRequestPress} />
+        <AuthButton
+          text="Send Request"
+          loading={isLoading}
+          onPress={onSendRequestPress}
+        />
       </ImageBackground>
     </View>
   );
@@ -95,5 +112,5 @@ const styles = StyleSheet.create({
     resizeMode: "contain",
   },
 });
-  
+
 export default ForgotPasswordScreen;

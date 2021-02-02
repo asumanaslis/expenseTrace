@@ -9,4 +9,11 @@ export const customStyles = StyleSheet.create({
     color: BLUE,
     fontWeight: "700",
   },
+  loadingIndicator: {
+    position: "absolute",
+    alignSelf: "center",
+    flex: 1,
+    justifyContent: "center",
+    color: BLUE,
+  },
 });
