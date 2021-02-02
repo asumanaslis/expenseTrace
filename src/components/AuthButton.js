@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: 0,
     right: 0,
-    marginBottom: "5%",
+    marginBottom: "10%",
     marginRight: 20,
     height: Platform.OS == "ios" ? "5.5%" : "7%",
     borderWidth: 1,
