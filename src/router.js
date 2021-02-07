@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 //Screen Components
 import GroupPage from "./screens/groupsPage/GroupPage";
 import Page from "./screens/groupsPage/page1";
-
+import categoryExpenseGroup from "./screens/expenseScreens/categoryExpenseGroup"
 
 //components
 import { BottomNavigator } from "./components/customBottomTabBar";
@@ -19,12 +19,14 @@ const Router = (props) => {
         <Tab.Navigator tabBar={(props) => <BottomNavigator {...props} />}>
             <Tab.Screen name="GroupPage" component={GroupPage} />
             <Tab.Screen name="Page1" component={Page} />
+            <Tab.Screen name="Home" component={TabScreens} />
+            <Tab.Screen name="categoryExpenseGroup" component={categoryExpenseGroup} />
         </Tab.Navigator>
     );
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="GroupPage">
+            <Stack.Navigator initialRouteName="categoryExpenseGroup">
                 <Stack.Screen
                     name="GroupPage"
                     component={GroupPage}
@@ -33,6 +35,11 @@ const Router = (props) => {
                 <Stack.Screen
                     name="Page1"
                     component={Page}
+                    options={{ headerShown: false }}
+                />
+                <Stack.Screen
+                    name="categoryExpenseGroup"
+                    component={categoryExpenseGroup}
                     options={{ headerShown: false }}
                 />
                 <Stack.Screen
