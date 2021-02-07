@@ -1,0 +1,185 @@
+import React from "react";
+import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
+import ProgressBar from "../components/ProgressBar";
+import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import randomColor from "randomcolor";
+import { VictoryPie } from "victory-native";
+import Bullet from "../components/Bullet";
+// import { navigate } from "../navigationRef";
+// import { firebase } from "../firebase/config";
+
+const PersonalScreen = ({ navigation }) => {
+  // const name = navigation.getParam("name");
+
+  // const onLogoutPress = () => {
+  //   firebase
+  //     .auth()
+  //     .signOut()
+  //     .then(() => {
+  //       navigate("Welcome");
+  //     })
+  //     .catch((error) => {
+  //       alert(error);
+  //     });
+  // };
+
+  // Data of Expenses
+  const data = [
+    {
+      id: Math.floor(Math.random() * 100) + 1,
+      category: "Yeme-İçme",
+      price: Math.floor(Math.random() * 1000) + 1,
+      color: randomColor(),
+    },
+    {
+      id: Math.floor(Math.random() * 100) + 1,
+      category: "Market",
+      price: Math.floor(Math.random() * 1000) + 1,
+      color: randomColor(),
+    },
+
+    {
+      id: Math.floor(Math.random() * 100) + 1,
+      category: "Eğlence",
+      price: Math.floor(Math.random() * 1000) + 1,
+      color: randomColor(),
+    },
+    {
+      id: Math.floor(Math.random() * 100) + 1,
+      category: "Genel",
+      price: Math.floor(Math.random() * 1000) + 1,
+      color: randomColor(),
+    },
+
+    {
+      id: Math.floor(Math.random() * 100) + 1,
+      category: "Hediyeler",
+      price: Math.floor(Math.random() * 1000) + 1,
+      color: randomColor(),
+    },
+    {
+      id: Math.floor(Math.random() * 100) + 1,
+      category: "Tatil",
+      price: Math.floor(Math.random() * 1000) + 1,
+      color: randomColor(),
+    },
+  ];
+
+  const totalPrice = () => {
+    var sum = 0;
+
+    data.map((item) => {
+      sum += item.price;
+    });
+
+    return sum;
+  };
+
+  function renderProgressBar() {
+    return data.map((item) => {
+      return <ProgressBar key={item.id + "Bar"} data={item} />;
+    });
+  }
+
+  function renderBullets() {
+    return data.map((item) => {
+      let expensePercentage = (item.price / totalPrice()) * 100;
+      return (
+        <Bullet
+          key={item.id + "Bullet"}
+          data={item}
+          percentage={expensePercentage.toFixed(1)}
+        />
+      );
+    });
+  }
+  function renderChartView() {
+    const colorScales = data.map((item) => item.color);
+
+    return (
+      <>
+        <VictoryPie
+          data={data}
+          x={"category"}
+          y={"price"}
+          labels={() => null}
+          innerRadius={70}
+          animate={{
+            duration: 2000,
+          }}
+          style={{
+            parent: {
+              ...styles.shadow,
+            },
+          }}
+          width={300}
+          height={300}
+          colorScale={colorScales}
+        />
+
+        <View style={{ position: "absolute", top: "45%", left: "33%" }}>
+          <Text style={{ textAlign: "center", fontSize: 28, color: "#FFBA08" }}>
+            {totalPrice()}₺
+          </Text>
+        </View>
+      </>
+    );
+  }
+
+  return (
+    <SafeAreaView style={{ alignItems: "center", flex: 1 }}>
+      {/* Button For Logging Out */}
+      {/* <Button title="Log Out" onPress={onLogoutPress} /> */}
+      {/* Month Button */}
+      <TouchableOpacity>
+        <View style={{ flexDirection: "row", alignItems: "center" }}>
+          <Text>Ekim </Text>
+          <Image source={require("../../assets/arrow-down-icon.png")} />
+        </View>
+      </TouchableOpacity>
+
+      <View style={{ flexDirection: "row" }}>
+        {/* CHART */}
+        <View style={{ flex: 3 / 5, alignItems: "center" }}>
+          {renderChartView()}
+        </View>
+        {/* BULLETS */}
+        <View
+          style={{
+            flex: 2 / 5,
+            marginLeft: 30,
+            marginTop: 15,
+          }}
+        >
+          {renderBullets()}
+        </View>
+      </View>
+      {/* Main Screen Seperator */}
+      <View
+        style={{
+          width: "90%",
+          borderTopWidth: 1,
+          borderTopColor: "#F7F7F7",
+          marginBottom: 5,
+        }}
+      />
+      {/* Expense Bars */}
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        style={styles.barContainer}
+      >
+        {renderProgressBar()}
+      </ScrollView>
+    </SafeAreaView>
+  );
+};
+
+const styles = StyleSheet.create({
+  barContainer: {
+    marginTop: 10,
+    width: "90%",
+    flex: 1,
+  },
+});
+
+export default PersonalScreen;

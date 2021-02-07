@@ -17,10 +17,11 @@ import AuthInput from "../components/AuthInput";
 import { customStyles } from "../styles/customStyles";
 import AuthButton from "../components/AuthButton";
 import { showAlert } from "../components/ShowAlert";
+import { navigate } from "../navigationRef";
 
 const background = require("../../assets/background.png");
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +48,7 @@ const LoginScreen = ({ navigation }) => {
                 return;
               }
               const user = firestoreDocument.data();
-              navigation.navigate("Home", { user });
+              navigate("Personal", { user });
               setIsLoading(false);
             })
             .catch((error) => {
@@ -70,6 +71,7 @@ const LoginScreen = ({ navigation }) => {
         {isLoading ? (
           <ActivityIndicator
             size="large"
+            color={BLUE}
             style={customStyles.loadingIndicator}
           />
         ) : null}
@@ -105,7 +107,7 @@ const LoginScreen = ({ navigation }) => {
         {/* Forget Password? Touchable Label */}
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("ForgotPassword");
+            navigate("ForgotPassword");
           }}
         >
           <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
@@ -127,7 +129,7 @@ const LoginScreen = ({ navigation }) => {
         <View style={styles.navRegisterContainer}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Register");
+              navigate("Register");
             }}
           >
             <Text style={{ color: WHITE }}>

@@ -9,6 +9,8 @@ import {
 import { firebase } from "../firebase/config";
 import AuthButton from "../components/AuthButton";
 import { customStyles } from "../styles/customStyles";
+import { navigate } from "../navigationRef";
+import { BLUE } from "../styles/colors";
 
 const background = require("../../assets/background.png");
 const logo = require("../../assets/logo.png");
@@ -27,9 +29,10 @@ const WelcomeScreen = ({ navigation }) => {
           .then((document) => {
             setIsLoading(false);
             const user = document.data();
-            navigation.navigate("Home", user);
+            navigate("Personal", user);
           })
           .catch((error) => {
+            alert(error.message);
             return;
           });
       } else {
@@ -42,13 +45,14 @@ const WelcomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground source={background} style={styles.background}>
+        {isLoading ? (
+          <ActivityIndicator
+            size="large"
+            color={BLUE}
+            style={customStyles.loadingIndicator}
+          />
+        ) : null}
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
-          {isLoading ? (
-            <ActivityIndicator
-              size="large"
-              style={customStyles.loadingIndicator}
-            />
-          ) : null}
           <Image source={logo} style={styles.logo} />
           <AuthButton
             text="Get Started"

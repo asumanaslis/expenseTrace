@@ -14,6 +14,5 @@ export const customStyles = StyleSheet.create({
     alignSelf: "center",
     flex: 1,
     justifyContent: "center",
-    color: BLUE,
   },
 });
