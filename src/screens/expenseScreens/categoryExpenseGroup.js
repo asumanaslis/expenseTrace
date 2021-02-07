@@ -1,8 +1,7 @@
 import React, { Component, useState } from 'react'
 import { Text, View, LogBox, SafeAreaView, StatusBar, StyleSheet } from 'react-native'
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { FlatList, ScrollView, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 // import { BottomPopup } from "../../components/bottomPopUp"
-import randomColor from "randomcolor";
 
 import Icon from 'react-native-vector-icons/FontAwesome';
 
@@ -11,7 +10,78 @@ import { Color } from '../../assets/colors';
 import { StyleVariables } from '../../styleVariable/StyleVariable';
 import { RFPercentage } from 'react-native-responsive-fontsize';
 
-const categoryExpenseGroup = () => {
+const data = [
+    {
+        id: 1,
+        expenseTitle: "Yeme-İçme",
+        price: 2500,
+        color: "#FF8552",
+    },
+    {
+        id: 2,
+        expenseTitle: "Market",
+        price: 1100,
+        color: "#301934",
+    },
+
+    {
+        id: 3,
+        expenseTitle: "Eğlence",
+        price: 580,
+        color: "#DB6C79",
+    },
+    {
+        id: 4,
+        expenseTitle: "Genel",
+        price: 1000,
+        color: "#297373",
+    },
+
+    {
+        id: 5,
+        expenseTitle: "Hediyeler",
+        price: 10,
+        color: "#FAE3E3",
+    },
+    {
+        id: 6,
+        expenseTitle: "Tatil",
+        price: 5000,
+        color: "#846B8A",
+    },
+
+    {
+        id: 7,
+        expenseTitle: "Mutfak masrafı",
+        price: 4000,
+        color: "#EA2B1F",
+    },
+];
+
+const Item = ({ expenseTitle }) => (
+    <View style={styles.main}>
+        <View style={styles.mainComponent}>
+            <View style={{ flexDirection: "column" }}>
+                <View style={styles.componentTexts}>
+                    <View style={styles.horizontalTexts}>
+                        <Text style={styles.titleText}>{expenseTitle}</Text>
+                        <Text style={styles.subtitleText}>Expense Subtitle</Text>
+                    </View>
+                    <Text style={styles.dateText}>30/01/2021</Text>
+                </View>
+            </View>
+            <View style={styles.price}>
+                <Text style={styles.priceText}>32₺</Text>
+            </View>
+        </View>
+    </View>
+);
+
+const expenseTitleExpenseGroup = () => {
+
+    const renderItem = ({ item }) => (
+        <Item expenseTitle={item.expenseTitle} />
+    );
 
     let popUpRef = React.createRef()
 
@@ -38,54 +108,6 @@ const categoryExpenseGroup = () => {
         popUpRef.close()
     }
 
-    const data = [
-        {
-            id: 1,
-            category: "Yeme-İçme",
-            price: 2500,
-            color: "#FF8552",
-        },
-        {
-            id: 2,
-            category: "Market",
-            price: 1100,
-            color: "#301934",
-        },
-
-        {
-            id: 3,
-            category: "Eğlence",
-            price: 580,
-            color: "#DB6C79",
-        },
-        {
-            id: 4,
-            category: "Genel",
-            price: 1000,
-            color: "#297373",
-        },
-
-        {
-            id: 5,
-            category: "Hediyeler",
-            price: 10,
-            color: "#FAE3E3",
-        },
-        {
-            id: 6,
-            category: "Tatil",
-            price: 5000,
-            color: "#846B8A",
-        },
-
-        {
-            id: 7,
-            category: "Mutfak masrafı",
-            price: 4000,
-            color: "#EA2B1F",
-        },
-    ];
-
     const totalPrice = () => {
         var sum = 0;
 
@@ -109,7 +131,7 @@ const categoryExpenseGroup = () => {
             <>
                 <VictoryPie
                     data={data}
-                    x={"category"}
+                    x={"expenseTitle"}
                     y={"price"}
                     labels={() => null}
                     innerRadius={100}
@@ -142,57 +164,47 @@ const categoryExpenseGroup = () => {
         <>
             <StatusBar barStyle="dark-content"></StatusBar>
             <SafeAreaView>
-                <View style={styles.pickers}>
-                    <TouchableWithoutFeedback style={styles.dropDown} onPress={onShowPopUp}>
-                        <Text style={styles.textStyle}>Ekim</Text>
-                        <Icon name="sort-down" size={25} style={styles.icons} />
-                    </TouchableWithoutFeedback>
-                    {
-                        //         <BottomPopup
-                        //          title="selamualeyke"
-                        //          ref={(target) => popUpRef = target}
-                        //          OnTouchOutside={onClosePopUp}
-                        //          data={popuplist}
-                        //      >
-                        //      </BottomPopup>
-                    }
-                    <TouchableWithoutFeedback style={styles.dropDown} onPress={onShowPopUp}>
-                        <Text style={styles.textStyle}>Yeme-İçme</Text>
-                        <Icon name="sort-down" size={25} style={styles.icons} />
-                    </TouchableWithoutFeedback>
-                    {
-                        //         <BottomPopup
-                        //          title="selamualeyke"
-                        //          ref={(target) => popUpRef = target}
-                        //          OnTouchOutside={onClosePopUp}
-                        //          data={popuplist}
-                        //      >
-                        //      </BottomPopup>
-                    }
-                </View>
+                <ScrollView>
 
-                <View style={styles.cake}>
-                    {renderChartView()}
-                </View>
-                <View style={styles.main}>
-                    <View style={styles.mainComponent}>
-                        <View style={{ flexDirection: "column" }}>
-                            <View style={styles.componentTexts}>
-                                <View style={styles.horizontalTexts}>
-                                    <Text style={styles.titleText}>Expense Title</Text>
-                                    <Text style={styles.subtitleText}>Expense Subtitle</Text>
-                                </View>
-                                <Text style={styles.dateText}>30/01/2021</Text>
-                            </View>
-                        </View>
-                        <View style={styles.price}>
-                            <Text style={styles.priceText}>32₺</Text>
-                        </View>
+                    <View style={styles.pickers}>
+                        <TouchableWithoutFeedback style={styles.dropDown} onPress={onShowPopUp}>
+                            <Text style={styles.textStyle}>Ekim</Text>
+                            <Icon name="sort-down" size={25} style={styles.icons} />
+                        </TouchableWithoutFeedback>
+                        {
+                            //         <BottomPopup
+                            //          title="selamualeyke"
+                            //          ref={(target) => popUpRef = target}
+                            //          OnTouchOutside={onClosePopUp}
+                            //          data={popuplist}
+                            //      >
+                            //      </BottomPopup>
+                        }
+                        <TouchableWithoutFeedback style={styles.dropDown} onPress={onShowPopUp}>
+                            <Text style={styles.textStyle}>Yeme-İçme</Text>
+                            <Icon name="sort-down" size={25} style={styles.icons} />
+                        </TouchableWithoutFeedback>
+                        {
+                            //         <BottomPopup
+                            //          title="selamualeyke"
+                            //          ref={(target) => popUpRef = target}
+                            //          OnTouchOutside={onClosePopUp}
+                            //          data={popuplist}
+                            //      >
+                            //      </BottomPopup>
+                        }
                     </View>
 
+                    <View style={styles.cake}>
+                        {renderChartView()}
+                    </View>
 
-
-                </View>
+                    <FlatList
+                        data={data}
+                        renderItem={renderItem}
+                        keyExtractor={item => item.id}
+                    />
+                </ScrollView>
 
             </SafeAreaView>
         </>
@@ -255,7 +267,6 @@ const styles = StyleSheet.create({
         borderBottomWidth: 1,
         borderBottomColor: Color.secondColor,
         flexDirection: "row",
-        marginTop: StyleVariables.height * 0.02
     },
     componentTexts: {
         flexDirection: "column",
@@ -293,4 +304,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default categoryExpenseGroup;
+export default expenseTitleExpenseGroup;
