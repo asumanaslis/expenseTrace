@@ -14,7 +14,20 @@ import { setNavigator } from "./src/navigationRef";
 import AddExpenseScreen from "./src/screens/AddExpenseScreen";
 import PersonalCategoryScreen from "./src/screens/PersonalCategoryScreen";
 
-const personal_icon = require("./assets/bottomTabAssets/personal-icon.png");
+const PersonalStack = createStackNavigator({
+  Personal: {
+    screen: PersonalScreen,
+    navigationOptions: () => ({
+      headerShown: false,
+    }),
+  },
+  PersonalCategory: {
+    screen: PersonalCategoryScreen,
+    navigationOptions: () => ({
+      headerShown: false,
+    }),
+  },
+});
 
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({
@@ -23,10 +36,11 @@ const switchNavigator = createSwitchNavigator({
     Register: RegisterScreen,
     ForgotPassword: ForgotPasswordScreen,
   }),
+
   mainFlow: createBottomTabNavigator(
     {
       Personal: {
-        screen: PersonalScreen,
+        screen: PersonalStack,
         navigationOptions: {
           tabBarIcon: () => {
             const img = require("./assets/bottomTabAssets/personal-icon.png");

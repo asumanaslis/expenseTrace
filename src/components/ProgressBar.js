@@ -1,12 +1,17 @@
 import React from "react";
-import { View, Text, StyleSheet, Animated } from "react-native";
+import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { RED } from "../styles/colors";
 import { navigate } from "../navigationRef";
 
 const ProgressBar = ({ data }) => {
   return (
-    <TouchableOpacity style={{ marginBottom: 10 }}>
+    <TouchableOpacity
+      style={{ marginBottom: 10 }}
+      onPress={() => {
+        navigate("PersonalCategory", data);
+      }}
+    >
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Text style={styles.barLabel}>{data.category}</Text>
         <Text style={{ marginRight: "10%", color: RED }}>-{data.price}₺</Text>

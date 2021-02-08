@@ -26,39 +26,39 @@ const PersonalScreen = ({ navigation }) => {
   // Data of Expenses
   const data = [
     {
-      id: Math.floor(Math.random() * 100) + 1,
+      id: 1,
       category: "Yeme-İçme",
       price: Math.floor(Math.random() * 1000) + 1,
       color: randomColor(),
     },
     {
-      id: Math.floor(Math.random() * 100) + 1,
+      id: 2,
       category: "Market",
       price: Math.floor(Math.random() * 1000) + 1,
       color: randomColor(),
     },
 
     {
-      id: Math.floor(Math.random() * 100) + 1,
+      id: 3,
       category: "Eğlence",
       price: Math.floor(Math.random() * 1000) + 1,
       color: randomColor(),
     },
     {
-      id: Math.floor(Math.random() * 100) + 1,
+      id: 4,
       category: "Genel",
       price: Math.floor(Math.random() * 1000) + 1,
       color: randomColor(),
     },
 
     {
-      id: Math.floor(Math.random() * 100) + 1,
+      id: 5,
       category: "Hediyeler",
       price: Math.floor(Math.random() * 1000) + 1,
       color: randomColor(),
     },
     {
-      id: Math.floor(Math.random() * 100) + 1,
+      id: 6,
       category: "Tatil",
       price: Math.floor(Math.random() * 1000) + 1,
       color: randomColor(),
