@@ -204,6 +204,8 @@ const expenseTitleExpenseGroup = () => {
                         renderItem={renderItem}
                         keyExtractor={item => item.id.toString()}
                     />
+
+                    <View style={{ padding: 50 }}></View>
                 </ScrollView>
 
             </SafeAreaView>
@@ -221,12 +223,12 @@ const styles = StyleSheet.create({
     },
     icons: {
         color: "#000000",
-        paddingStart: 10
+        paddingStart: StyleVariables.width * 0.02,
     },
     pickers: {
         flexDirection: "row",
         justifyContent: 'space-around',
-        marginTop: 20
+        marginTop: StyleVariables.height * 0.02
     },
     cake: {
         flexDirection: 'row',
@@ -288,21 +290,21 @@ const styles = StyleSheet.create({
         flexDirection: "row",
     },
     dateText: {
-        fontSize: RFPercentage(1.8),
-        fontWeight: "600"
+        fontSize: RFPercentage(2),
+        fontWeight: "600",
+        marginTop: StyleVariables.width * 0.01
     },
     price: {
         flexDirection: "row",
         alignItems: "center",
         flex: 1,
         justifyContent: "flex-end",
-        marginEnd: 15
+        marginEnd: StyleVariables.width * 0.04
     },
     priceText: {
         fontSize: RFPercentage(3.7),
         fontWeight: "bold",
         textAlign: 'right',
-
     },
     iconStyle: {
         fontSize: RFPercentage(4),
