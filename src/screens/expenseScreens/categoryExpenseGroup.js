@@ -202,7 +202,7 @@ const expenseTitleExpenseGroup = () => {
                     <FlatList
                         data={data}
                         renderItem={renderItem}
-                        keyExtractor={item => item.id}
+                        keyExtractor={item => item.id.toString()}
                     />
                 </ScrollView>
 
@@ -217,7 +217,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     textStyle: {
-        fontSize: 20
+        fontSize: RFPercentage(3)
     },
     icons: {
         color: "#000000",
@@ -241,14 +241,14 @@ const styles = StyleSheet.create({
     },
     totalPrice: {
         fontSize: 40,
-        color: "#FFBA08",
+        color: Color.yellow,
         flexDirection: "column",
         justifyContent: 'center',
         textAlign: "center"
     },
     missPrice: {
-        fontSize: 20,
-        color: "#FF0033",
+        fontSize: RFPercentage(3),
+        color: Color.red,
         flexDirection: "column",
         justifyContent: 'center',
         textAlign: "center"
@@ -281,6 +281,8 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(2),
         color: Color.secondColor,
         textAlignVertical: "bottom",
+        alignSelf: 'flex-end',
+        marginStart: 5
     },
     horizontalTexts: {
         flexDirection: "row",
@@ -291,12 +293,16 @@ const styles = StyleSheet.create({
     },
     price: {
         flexDirection: "row",
-        marginStart: 90,
-        alignItems: "center"
+        alignItems: "center",
+        flex: 1,
+        justifyContent: "flex-end",
+        marginEnd: 15
     },
     priceText: {
-        fontSize: 30,
-        fontWeight: "bold"
+        fontSize: RFPercentage(3.7),
+        fontWeight: "bold",
+        textAlign: 'right',
+
     },
     iconStyle: {
         fontSize: RFPercentage(4),
