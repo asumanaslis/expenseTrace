@@ -65,7 +65,7 @@ const data = [
     },
 ];
 
-const Item = ({ expenseTitle, expenseSubtitle }) => (
+const Item = ({ expenseTitle, expenseSubtitle, price }) => (
     <View style={styles.main}>
         <View style={styles.mainComponent}>
             <View style={{ flexDirection: "column" }}>
@@ -78,7 +78,7 @@ const Item = ({ expenseTitle, expenseSubtitle }) => (
                 </View>
             </View>
             <View style={styles.price}>
-                <Text style={styles.priceText}>32₺</Text>
+                <Text style={styles.priceText}>{price}₺</Text>
             </View>
         </View>
     </View>
@@ -87,7 +87,7 @@ const Item = ({ expenseTitle, expenseSubtitle }) => (
 const expenseTitleExpenseGroup = () => {
 
     const renderItem = ({ item }) => (
-        <Item expenseTitle={item.expenseTitle} expenseSubtitle={item.expenseSubtitle} />
+        <Item expenseTitle={item.expenseTitle} expenseSubtitle={item.expenseSubtitle} price={item.price} />
 
     );
 
