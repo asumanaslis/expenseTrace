@@ -14,12 +14,14 @@ const data = [
     {
         id: 1,
         expenseTitle: "Yeme-İçme",
+        expenseSubtitle: "Açıklama",
         price: 2500,
         color: "#FF8552",
     },
     {
         id: 2,
         expenseTitle: "Market",
+        expenseSubtitle: "Açıklama2",
         price: 1100,
         color: "#301934",
     },
@@ -27,12 +29,14 @@ const data = [
     {
         id: 3,
         expenseTitle: "Eğlence",
+        expenseSubtitle: "Açıklama3",
         price: 580,
         color: "#DB6C79",
     },
     {
         id: 4,
         expenseTitle: "Genel",
+        expenseSubtitle: "Açıklama4",
         price: 1000,
         color: "#297373",
     },
@@ -40,12 +44,14 @@ const data = [
     {
         id: 5,
         expenseTitle: "Hediyeler",
+        expenseSubtitle: "Açıklama5",
         price: 10,
         color: "#FAE3E3",
     },
     {
         id: 6,
         expenseTitle: "Tatil",
+        expenseSubtitle: "Açıklama6",
         price: 5000,
         color: "#846B8A",
     },
@@ -53,19 +59,20 @@ const data = [
     {
         id: 7,
         expenseTitle: "Mutfak masrafı",
+        expenseSubtitle: "Açıklama7",
         price: 4000,
         color: "#EA2B1F",
     },
 ];
 
-const Item = ({ expenseTitle }) => (
+const Item = ({ expenseTitle, expenseSubtitle }) => (
     <View style={styles.main}>
         <View style={styles.mainComponent}>
             <View style={{ flexDirection: "column" }}>
                 <View style={styles.componentTexts}>
                     <View style={styles.horizontalTexts}>
                         <Text style={styles.titleText}>{expenseTitle}</Text>
-                        <Text style={styles.subtitleText}>Expense Subtitle</Text>
+                        <Text style={styles.subtitleText}>{expenseSubtitle}</Text>
                     </View>
                     <Text style={styles.dateText}>30/01/2021</Text>
                 </View>
@@ -80,7 +87,8 @@ const Item = ({ expenseTitle }) => (
 const expenseTitleExpenseGroup = () => {
 
     const renderItem = ({ item }) => (
-        <Item expenseTitle={item.expenseTitle} />
+        <Item expenseTitle={item.expenseTitle} expenseSubtitle={item.expenseSubtitle} />
+
     );
 
     let popUpRef = React.createRef()
