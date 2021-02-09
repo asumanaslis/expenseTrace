@@ -88,7 +88,6 @@ const expenseTitleExpenseGroup = () => {
 
     const renderItem = ({ item }) => (
         <Item expenseTitle={item.expenseTitle} expenseSubtitle={item.expenseSubtitle} price={item.price} />
-
     );
 
     let popUpRef = React.createRef()
@@ -292,7 +291,7 @@ const styles = StyleSheet.create({
         color: Color.secondColor,
         textAlignVertical: "bottom",
         alignSelf: 'flex-end',
-        marginStart: 5
+        marginStart: 5,
     },
     horizontalTexts: {
         flexDirection: "row",

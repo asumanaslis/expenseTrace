@@ -75,6 +75,8 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(2),
         color: Color.secondColor,
         textAlignVertical: "bottom",
+        alignSelf: 'flex-end',
+        marginStart: 5,
     },
     horizontalTexts: {
         flexDirection: "row",
@@ -85,11 +87,15 @@ const styles = StyleSheet.create({
     },
     icon: {
         flexDirection: "row",
-        marginStart: 140,
-        alignItems: "center"
+        alignItems: "center",
+        flex: 1,
+        justifyContent: "flex-end",
+        marginEnd: StyleVariables.width * 0.04
     },
     iconStyle: {
         fontSize: RFPercentage(4),
-        color: Color.textColor
+        color: Color.textColor,
+        fontWeight: "bold",
+        textAlign: 'right',
     }
 })
