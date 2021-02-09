@@ -1,9 +1,12 @@
 import React from "react";
-import { View, Image } from "react-native";
+import { Image } from "react-native";
 import { TAB_BAR } from "./src/styles/colors";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import { createBottomTabNavigator } from "react-navigation-tabs";
+import {
+  createBottomTabNavigator,
+  createTabNavigator,
+} from "react-navigation-tabs";
 import WelcomeScreen from "./src/screens/WelcomeScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import RegisterScreen from "./src/screens/RegisterScreen";
@@ -14,20 +17,19 @@ import { setNavigator } from "./src/navigationRef";
 import AddExpenseScreen from "./src/screens/AddExpenseScreen";
 import PersonalCategoryScreen from "./src/screens/PersonalCategoryScreen";
 
-const PersonalStack = createStackNavigator({
-  Personal: {
-    screen: PersonalScreen,
-    navigationOptions: () => ({
-      headerShown: false,
-    }),
+const PersonalStack = createStackNavigator(
+  {
+    Personal: {
+      screen: PersonalScreen,
+    },
+    PersonalCategory: {
+      screen: PersonalCategoryScreen,
+    },
   },
-  PersonalCategory: {
-    screen: PersonalCategoryScreen,
-    navigationOptions: () => ({
-      headerShown: false,
-    }),
-  },
-});
+  {
+    headerMode: "none",
+  }
+);
 
 const switchNavigator = createSwitchNavigator({
   loginFlow: createStackNavigator({

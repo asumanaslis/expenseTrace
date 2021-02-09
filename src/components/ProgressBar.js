@@ -4,7 +4,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { RED } from "../styles/colors";
 import { navigate } from "../navigationRef";
 
-const ProgressBar = ({ data }) => {
+const ProgressBar = ({ data, percentage }) => {
   return (
     <TouchableOpacity
       style={{ marginBottom: 10 }}
@@ -16,16 +16,28 @@ const ProgressBar = ({ data }) => {
         <Text style={styles.barLabel}>{data.category}</Text>
         <Text style={{ marginRight: "10%", color: RED }}>-{data.price}₺</Text>
       </View>
-      <View style={styles.bar(data.color)}></View>
+      <View style={styles.bar(data.color, percentage)}>
+        <View
+          style={{
+            position: "absolute",
+            borderRadius: 10,
+            width: `${percentage}%`,
+            backgroundColor: data.color,
+            top: 0,
+            bottom: 0,
+            borderRadius: 10,
+          }}
+        />
+      </View>
     </TouchableOpacity>
   );
 };
 
 const styles = StyleSheet.create({
-  bar: (color) => {
+  bar: (color, percentage) => {
     return {
       alignSelf: "center",
-      backgroundColor: color,
+      // backgroundColor: color,
       width: "85%",
       height: 20,
       borderRadius: 10,

@@ -77,7 +77,14 @@ const PersonalScreen = ({ navigation }) => {
 
   function renderProgressBar() {
     return data.map((item) => {
-      return <ProgressBar key={item.id + "Bar"} data={item} />;
+      const expensePercentage = (item.price / totalPrice()) * 100;
+      return (
+        <ProgressBar
+          key={item.id + "Bar"}
+          data={item}
+          percentage={expensePercentage}
+        />
+      );
     });
   }
 
@@ -132,7 +139,9 @@ const PersonalScreen = ({ navigation }) => {
       {/* <Button title="Log Out" onPress={onLogoutPress} /> */}
       {/* Month Button */}
       <TouchableOpacity>
-        <View style={{ flexDirection: "row", alignItems: "center" }}>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}
+        >
           <Text>Ekim </Text>
           <Image source={require("../../assets/arrow-down-icon.png")} />
         </View>
