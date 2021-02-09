@@ -134,7 +134,9 @@ const PersonalScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ alignItems: "center", flex: 1 }}>
+    <SafeAreaView
+      style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
+    >
       {/* Button For Logging Out */}
       {/* <Button title="Log Out" onPress={onLogoutPress} /> */}
       {/* Month Button */}

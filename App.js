@@ -16,6 +16,7 @@ import GroupScreen from "./src/screens/GroupScreen";
 import { setNavigator } from "./src/navigationRef";
 import AddExpenseScreen from "./src/screens/AddExpenseScreen";
 import PersonalCategoryScreen from "./src/screens/PersonalCategoryScreen";
+import AllGroupsScreen from "./src/screens/AllGroupsScreen";
 
 const PersonalStack = createStackNavigator(
   {
@@ -24,6 +25,20 @@ const PersonalStack = createStackNavigator(
     },
     PersonalCategory: {
       screen: PersonalCategoryScreen,
+    },
+  },
+  {
+    headerMode: "none",
+  }
+);
+
+const GroupStack = createStackNavigator(
+  {
+    AllGroups: {
+      screen: AllGroupsScreen,
+    },
+    GroupScreen: {
+      screen: GroupScreen,
     },
   },
   {
@@ -59,6 +74,7 @@ const switchNavigator = createSwitchNavigator({
               <Image
                 source={img}
                 style={{
+                  backgroundColor: TAB_BAR,
                   height: 50,
                   width: 50,
                   resizeMode: "contain",
@@ -70,8 +86,8 @@ const switchNavigator = createSwitchNavigator({
           },
         },
       },
-      Group: {
-        screen: GroupScreen,
+      AllGroups: {
+        screen: GroupStack,
         navigationOptions: {
           tabBarIcon: () => {
             const img = require("./assets/bottomTabAssets/group-icon.png");

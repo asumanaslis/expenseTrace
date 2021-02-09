@@ -118,7 +118,9 @@ const GroupScreen = () => {
   }
 
   return (
-    <SafeAreaView style={{ alignItems: "center", flex: 1 }}>
+    <SafeAreaView
+      style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
+    >
       {/* Container: Create Group, Month and Group Buttons */}
       <View
         style={{

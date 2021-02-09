@@ -119,7 +119,9 @@ const PersonalCategoryScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView style={{ alignItems: "center", flex: 1 }}>
+    <SafeAreaView
+      style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
+    >
       {/* Top Labels */}
       <View
         style={{
