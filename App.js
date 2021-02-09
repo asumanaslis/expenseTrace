@@ -3,20 +3,19 @@ import { Image } from "react-native";
 import { TAB_BAR } from "./src/styles/colors";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
-import {
-  createBottomTabNavigator,
-  createTabNavigator,
-} from "react-navigation-tabs";
-import WelcomeScreen from "./src/screens/WelcomeScreen";
-import LoginScreen from "./src/screens/LoginScreen";
-import RegisterScreen from "./src/screens/RegisterScreen";
-import ForgotPasswordScreen from "./src/screens/ForgotPasswordScreen";
-import PersonalScreen from "./src/screens/PersonalScreen";
-import GroupScreen from "./src/screens/GroupScreen";
+import { createBottomTabNavigator } from "react-navigation-tabs";
+import WelcomeScreen from "./src/screens/LoginScreens/WelcomeScreen";
+import LoginScreen from "./src/screens/LoginScreens/LoginScreen";
+import RegisterScreen from "./src/screens/LoginScreens/RegisterScreen";
+import ForgotPasswordScreen from "./src/screens/LoginScreens/ForgotPasswordScreen";
+import PersonalScreen from "./src/screens/PersonalScreens/PersonalScreen";
+import GroupScreen from "./src/screens/GroupScreens/GroupScreen";
 import { setNavigator } from "./src/navigationRef";
 import AddExpenseScreen from "./src/screens/AddExpenseScreen";
-import PersonalCategoryScreen from "./src/screens/PersonalCategoryScreen";
-import AllGroupsScreen from "./src/screens/AllGroupsScreen";
+import PersonalCategoryScreen from "./src/screens/PersonalScreens/PersonalCategoryScreen";
+import AllGroupsScreen from "./src/screens/GroupScreens/AllGroupsScreen";
+import GroupMemberScreen from "./src/screens/GroupScreens/GroupMemberScreen";
+import GroupCategoryScreen from "./src/screens/GroupScreens/GroupCategoryScreen";
 
 const PersonalStack = createStackNavigator(
   {
@@ -34,15 +33,33 @@ const PersonalStack = createStackNavigator(
 
 const GroupStack = createStackNavigator(
   {
+    GroupScreen: {
+      screen: GroupScreen,
+    },
     AllGroups: {
       screen: AllGroupsScreen,
     },
-    GroupScreen: {
-      screen: GroupScreen,
+    GroupMember: {
+      screen: GroupMemberScreen,
+    },
+    GroupCategory: {
+      screen: GroupCategoryScreen,
     },
   },
   {
     headerMode: "none",
+  }
+);
+
+const AddExpenseStack = createStackNavigator(
+  {
+    AddExpense: {
+      screen: AddExpenseScreen,
+    },
+  },
+  {
+    headerMode: "none",
+    mode: "modal",
   }
 );
 
@@ -66,7 +83,7 @@ const switchNavigator = createSwitchNavigator({
         },
       },
       AddExpense: {
-        screen: AddExpenseScreen,
+        screen: AddExpenseStack,
         navigationOptions: {
           tabBarIcon: () => {
             const img = require("./assets/bottomTabAssets/add-icon.png");
@@ -86,7 +103,7 @@ const switchNavigator = createSwitchNavigator({
           },
         },
       },
-      AllGroups: {
+      GroupScreen: {
         screen: GroupStack,
         navigationOptions: {
           tabBarIcon: () => {

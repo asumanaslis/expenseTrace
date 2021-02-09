@@ -1,12 +1,8 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 
 const AddExpenseScreen = () => {
-  return (
-    <View style={{ margin: 100 }}>
-      <Text>AddExpenseScreen</Text>
-    </View>
-  );
+  return <View style={{ margin: 100 }}></View>;
 };
 
 const styles = StyleSheet.create({});

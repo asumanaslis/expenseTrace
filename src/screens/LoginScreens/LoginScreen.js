@@ -10,16 +10,16 @@ import {
   Alert,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AuthLogoButton from "../components/AuthLogoButton";
-import { firebase } from "../firebase/config";
-import { WHITE, BLUE } from "../styles/colors";
-import AuthInput from "../components/AuthInput";
-import { customStyles } from "../styles/customStyles";
-import AuthButton from "../components/AuthButton";
-import { showAlert } from "../components/ShowAlert";
-import { navigate } from "../navigationRef";
+import AuthLogoButton from "../../components/AuthLogoButton";
+import { firebase } from "../../firebase/config";
+import { WHITE, BLUE } from "../../styles/colors";
+import AuthInput from "../../components/AuthInput";
+import { customStyles } from "../../styles/customStyles";
+import AuthButton from "../../components/AuthButton";
+import { showAlert } from "../../components/ShowAlert";
+import { navigate } from "../../navigationRef";
 
-const background = require("../../assets/background.png");
+const background = require("../../../assets/background.png");
 
 const LoginScreen = () => {
   const [email, setEmail] = useState("");

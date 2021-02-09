@@ -6,14 +6,14 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
-import { firebase } from "../firebase/config";
-import AuthButton from "../components/AuthButton";
-import { customStyles } from "../styles/customStyles";
-import { navigate } from "../navigationRef";
-import { BLUE } from "../styles/colors";
+import { firebase } from "../../firebase/config";
+import AuthButton from "../../components/AuthButton";
+import { customStyles } from "../../styles/customStyles";
+import { navigate } from "../../navigationRef";
+import { BLUE } from "../../styles/colors";
 
-const background = require("../../assets/background.png");
-const logo = require("../../assets/logo.png");
+const background = require("../../../assets/background.png");
+const logo = require("../../../assets/logo.png");
 
 const WelcomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);

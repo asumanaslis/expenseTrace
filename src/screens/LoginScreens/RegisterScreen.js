@@ -8,16 +8,16 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator,
 } from "react-native";
-import { firebase } from "../firebase/config";
-import AuthLogoButton from "../components/AuthLogoButton";
-import { WHITE, BLUE } from "../styles/colors";
-import AuthInput from "../components/AuthInput";
-import { customStyles } from "../styles/customStyles";
-import AuthButton from "../components/AuthButton";
-import { showAlert } from "../components/ShowAlert";
-import { navigate } from "../navigationRef";
+import { firebase } from "../../firebase/config";
+import AuthLogoButton from "../../components/AuthLogoButton";
+import { WHITE, BLUE } from "../../styles/colors";
+import AuthInput from "../../components/AuthInput";
+import { customStyles } from "../../styles/customStyles";
+import AuthButton from "../../components/AuthButton";
+import { showAlert } from "../../components/ShowAlert";
+import { navigate } from "../../navigationRef";
 
-const background = require("../../assets/background.png");
+const background = require("../../../assets/background.png");
 
 const RegisterScreen = () => {
   const [email, setEmail] = useState("");

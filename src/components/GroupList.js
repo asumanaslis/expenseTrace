@@ -21,7 +21,7 @@ const GroupList = () => {
     >
       <View style={{ marginLeft: 5 }}>
         <View style={{ flexDirection: "row" }}>
-          <Text style={{ fontSize: 16 }}>GroupTitle</Text>
+          <Text style={{ fontSize: 16 }}>Group Title</Text>
           <Text
             style={{
               fontSize: 8,

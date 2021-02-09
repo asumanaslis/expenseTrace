@@ -1,13 +1,29 @@
 import React from "react";
 import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
-import ProgressBar from "../components/ProgressBar";
+import ProgressBar from "../../components/ProgressBar";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
-import Bullet from "../components/Bullet";
-import { BLUE } from "../styles/colors";
+import Bullet from "../../components/Bullet";
+// import { navigate } from "../navigationRef";
+// import { firebase } from "../firebase/config";
 
-const GroupScreen = () => {
+const PersonalScreen = ({ navigation }) => {
+  // const name = navigation.getParam("name");
+
+  // const onLogoutPress = () => {
+  //   firebase
+  //     .auth()
+  //     .signOut()
+  //     .then(() => {
+  //       navigate("Welcome");
+  //     })
+  //     .catch((error) => {
+  //       alert(error);
+  //     });
+  // };
+
+  // Data of Expenses
   const data = [
     {
       id: 1,
@@ -67,6 +83,7 @@ const GroupScreen = () => {
           key={item.id + "Bar"}
           data={item}
           percentage={expensePercentage}
+          nav="PersonalCategory"
         />
       );
     });
@@ -121,39 +138,17 @@ const GroupScreen = () => {
     <SafeAreaView
       style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
     >
-      {/* Container: Create Group, Month and Group Buttons */}
-      <View
-        style={{
-          flexDirection: "row",
-          marginTop: 20,
-          width: "90%",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
-      >
-        {/* Create Group Button */}
-        <View style={styles.createGroupContainer}>
-          <TouchableOpacity>
-            <Text style={styles.createGroupText}>Create Group</Text>
-          </TouchableOpacity>
+      {/* Button For Logging Out */}
+      {/* <Button title="Log Out" onPress={onLogoutPress} /> */}
+      {/* Month Button */}
+      <TouchableOpacity>
+        <View
+          style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}
+        >
+          <Text>Ekim </Text>
+          <Image source={require("../../../assets/arrow-down-icon.png")} />
         </View>
-
-        {/* Month */}
-        <TouchableOpacity>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Ekim </Text>
-            <Image source={require("../../assets/arrow-down-icon.png")} />
-          </View>
-        </TouchableOpacity>
-
-        {/* Group */}
-        <TouchableOpacity>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Group </Text>
-            <Image source={require("../../assets/arrow-down-icon.png")} />
-          </View>
-        </TouchableOpacity>
-      </View>
+      </TouchableOpacity>
 
       <View style={{ flexDirection: "row" }}>
         {/* CHART */}
@@ -197,21 +192,6 @@ const styles = StyleSheet.create({
     width: "90%",
     flex: 1,
   },
-  createGroupContainer: {
-    marginRight: 20,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: BLUE,
-    width: "40%",
-    height: "100%",
-  },
-  createGroupText: {
-    marginTop: "10%",
-    marginBottom: "10%",
-    color: BLUE,
-    fontSize: 18,
-    textAlign: "center",
-  },
 });
 
-export default GroupScreen;
+export default PersonalScreen;

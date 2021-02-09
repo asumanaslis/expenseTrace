@@ -9,10 +9,10 @@ import {
 } from "react-native";
 import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
-import ExpenseList from "../components/ExpenseList";
+import ExpenseList from "../../components/ExpenseList";
 import { ScrollView } from "react-native-gesture-handler";
 
-const PersonalCategoryScreen = ({ navigation }) => {
+const GroupCategoryScreen = ({ navigation }) => {
   const category = navigation.state.params.category;
   const categoryData = [
     {
@@ -134,7 +134,7 @@ const PersonalCategoryScreen = ({ navigation }) => {
         <TouchableOpacity>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
             <Text>Ekim </Text>
-            <Image source={require("../../assets/arrow-down-icon.png")} />
+            <Image source={require("../../../assets/arrow-down-icon.png")} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity>
@@ -156,4 +156,4 @@ const PersonalCategoryScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({});
 
-export default PersonalCategoryScreen;
+export default GroupCategoryScreen;

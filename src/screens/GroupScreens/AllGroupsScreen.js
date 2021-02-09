@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, View, StyleSheet, SafeAreaView } from "react-native";
+import { Text, StyleSheet, SafeAreaView } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
-import GroupList from "../components/GroupList";
+import GroupList from "../../components/GroupList";
 
 const AllGroupsScreen = () => {
   return (
