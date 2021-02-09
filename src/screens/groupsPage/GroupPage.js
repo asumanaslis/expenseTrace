@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, StatusBar } from 'react-native'
 import { Color } from '../../assets/colors'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -8,6 +8,7 @@ export default class GroupPage extends Component {
     render() {
         return (
             <View style={styles.main}>
+                <StatusBar barStyle="dark-content"></StatusBar>
                 <Text style={styles.mainTitleText}>Groups</Text>
                 <View style={styles.mainComponent}>
                     <View style={{ flexDirection: "column" }}>

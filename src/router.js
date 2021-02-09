@@ -26,7 +26,7 @@ const Router = (props) => {
 
     return (
         <NavigationContainer>
-            <Stack.Navigator initialRouteName="GroupPage">
+            <Stack.Navigator initialRouteName="categoryExpenseGroup">
                 <Stack.Screen
                     name="GroupPage"
                     component={GroupPage}
