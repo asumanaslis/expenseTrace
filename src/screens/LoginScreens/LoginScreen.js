@@ -7,20 +7,19 @@ import {
   KeyboardAvoidingView,
   Platform,
   ActivityIndicator,
-  Alert,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import AuthLogoButton from "../components/AuthLogoButton";
-import { firebase } from "../firebase/config";
-import { WHITE, BLUE } from "../styles/colors";
-import AuthInput from "../components/AuthInput";
-import { customStyles } from "../styles/customStyles";
-import AuthButton from "../components/AuthButton";
-import { showAlert } from "../components/ShowAlert";
+import AuthLogoButton from "../../components/AuthLogoButton";
+import { firebase } from "../../firebase/config";
+import AuthInput from "../../components/AuthInput";
+import AuthButton from "../../components/AuthButton";
+import { showAlert } from "../../components/ShowAlert";
+import { navigate } from "../../navigationRef";
+import { Colors, customStyles } from "../../styles/index";
 
-const background = require("../../assets/background.png");
+const background = require("../../../assets/background.png");
 
-const LoginScreen = ({ navigation }) => {
+const LoginScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -47,7 +46,7 @@ const LoginScreen = ({ navigation }) => {
                 return;
               }
               const user = firestoreDocument.data();
-              navigation.navigate("Home", { user });
+              navigate("Personal", { user });
               setIsLoading(false);
             })
             .catch((error) => {
@@ -70,6 +69,7 @@ const LoginScreen = ({ navigation }) => {
         {isLoading ? (
           <ActivityIndicator
             size="large"
+            color={Colors.blue}
             style={customStyles.loadingIndicator}
           />
         ) : null}
@@ -105,7 +105,7 @@ const LoginScreen = ({ navigation }) => {
         {/* Forget Password? Touchable Label */}
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate("ForgotPassword");
+            navigate("ForgotPassword");
           }}
         >
           <Text style={styles.forgotPasswordText}>Forgot Password?</Text>
@@ -127,10 +127,10 @@ const LoginScreen = ({ navigation }) => {
         <View style={styles.navRegisterContainer}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Register");
+              navigate("Register");
             }}
           >
-            <Text style={{ color: WHITE }}>
+            <Text style={{ color: Colors.white }}>
               <Text>New Here? </Text>
               <Text style={{ fontWeight: "700" }}>Register</Text>
             </Text>
@@ -154,7 +154,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   forgotPasswordText: {
-    color: BLUE,
+    color: Colors.blue,
     fontWeight: "700",
     alignSelf: "flex-end",
     width: "40%",

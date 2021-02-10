@@ -6,7 +6,7 @@ import {
   StyleSheet,
   Platform,
 } from "react-native";
-import { WHITE } from "../styles/colors";
+import { Colors } from "../styles/index";
 
 const AuthButton = ({ text, loading, ...props }) => {
   return (
@@ -28,12 +28,12 @@ const styles = StyleSheet.create({
     height: Platform.OS == "ios" ? "5.5%" : "7%",
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: WHITE,
+    borderColor: Colors.white,
     width: "40%",
     justifyContent: "center",
   },
   text: {
-    color: WHITE,
+    color: Colors.white,
     fontSize: 24,
     textAlign: "center",
   },

@@ -9,14 +9,14 @@ import {
   Alert,
   ActivityIndicator,
 } from "react-native";
-import AuthInput from "../components/AuthInput";
-import { customStyles } from "../styles/customStyles";
-import AuthButton from "../components/AuthButton";
-import { firebase } from "../firebase/config";
-import { showAlert } from "../components/ShowAlert";
+import AuthInput from "../../components/AuthInput";
+import { customStyles } from "../../styles/index";
+import AuthButton from "../../components/AuthButton";
+import { firebase } from "../../firebase/config";
+import { showAlert } from "../../components/ShowAlert";
 
-const background = require("../../assets/background.png");
-const arrow_icon = require("../../assets/arrow-icon.png");
+const background = require("../../../assets/background.png");
+const arrow_icon = require("../../../assets/arrow-icon.png");
 
 const ForgotPasswordScreen = ({ navigation }) => {
   const [email, setEmail] = useState("");

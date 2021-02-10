@@ -8,17 +8,17 @@ import {
   KeyboardAvoidingView,
   ActivityIndicator,
 } from "react-native";
-import { firebase } from "../firebase/config";
-import AuthLogoButton from "../components/AuthLogoButton";
-import { WHITE } from "../styles/colors";
-import AuthInput from "../components/AuthInput";
-import { customStyles } from "../styles/customStyles";
-import AuthButton from "../components/AuthButton";
-import { showAlert } from "../components/ShowAlert";
+import { firebase } from "../../firebase/config";
+import AuthLogoButton from "../../components/AuthLogoButton";
+import AuthInput from "../../components/AuthInput";
+import AuthButton from "../../components/AuthButton";
+import { showAlert } from "../../components/ShowAlert";
+import { navigate } from "../../navigationRef";
+import { Colors, customStyles } from "../../styles/index";
 
-const background = require("../../assets/background.png");
+const background = require("../../../assets/background.png");
 
-const RegisterScreen = ({ navigation }) => {
+const RegisterScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState("");
@@ -42,7 +42,7 @@ const RegisterScreen = ({ navigation }) => {
           .doc(uid)
           .set(user)
           .then(() => {
-            navigation.navigate("Home", { user });
+            navigate("Personal", { user });
           })
           .catch((error) => {
             showAlert(error);
@@ -65,6 +65,7 @@ const RegisterScreen = ({ navigation }) => {
         {isLoading ? (
           <ActivityIndicator
             size="large"
+            color={Colors.blue}
             style={customStyles.loadingIndicator}
           />
         ) : null}
@@ -127,10 +128,10 @@ const RegisterScreen = ({ navigation }) => {
         <View style={styles.navRegisterContainer}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("Login");
+              navigate("Login");
             }}
           >
-            <Text style={{ color: WHITE }}>
+            <Text style={{ color: Colors.white }}>
               <Text>Already Member? </Text>
               <Text style={{ fontWeight: "700" }}>Login</Text>
             </Text>

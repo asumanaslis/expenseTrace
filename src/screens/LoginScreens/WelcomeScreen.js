@@ -6,12 +6,13 @@ import {
   Image,
   ActivityIndicator,
 } from "react-native";
-import { firebase } from "../firebase/config";
-import AuthButton from "../components/AuthButton";
-import { customStyles } from "../styles/customStyles";
+import { firebase } from "../../firebase/config";
+import AuthButton from "../../components/AuthButton";
+import { navigate } from "../../navigationRef";
+import { Colors, customStyles } from "../../styles/index";
 
-const background = require("../../assets/background.png");
-const logo = require("../../assets/logo.png");
+const background = require("../../../assets/background.png");
+const logo = require("../../../assets/logo.png");
 
 const WelcomeScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(true);
@@ -27,9 +28,10 @@ const WelcomeScreen = ({ navigation }) => {
           .then((document) => {
             setIsLoading(false);
             const user = document.data();
-            navigation.navigate("Home", user);
+            navigate("Personal", user);
           })
           .catch((error) => {
+            alert(error.message);
             return;
           });
       } else {
@@ -42,13 +44,14 @@ const WelcomeScreen = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <ImageBackground source={background} style={styles.background}>
+        {isLoading ? (
+          <ActivityIndicator
+            size="large"
+            color={Colors.blue}
+            style={customStyles.loadingIndicator}
+          />
+        ) : null}
         <View style={{ flex: 1, justifyContent: "flex-end" }}>
-          {isLoading ? (
-            <ActivityIndicator
-              size="large"
-              style={customStyles.loadingIndicator}
-            />
-          ) : null}
           <Image source={logo} style={styles.logo} />
           <AuthButton
             text="Get Started"
