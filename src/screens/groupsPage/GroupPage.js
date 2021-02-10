@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet, StatusBar } from 'react-native'
 import { Color } from '../../assets/colors'
 import Icon from 'react-native-vector-icons/Ionicons';
 import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
@@ -8,22 +8,8 @@ export default class GroupPage extends Component {
     render() {
         return (
             <View style={styles.main}>
+                <StatusBar barStyle="dark-content"></StatusBar>
                 <Text style={styles.mainTitleText}>Groups</Text>
-                <View style={styles.mainComponent}>
-                    <View style={{ flexDirection: "column" }}>
-                        <View style={styles.componentTexts}>
-                            <View style={styles.horizontalTexts}>
-                                <Text style={styles.titleText}>Group Title</Text>
-                                <Text style={styles.subtitleText}>Group Subtitle</Text>
-                            </View>
-                            <Text style={styles.dateText}>30/01/2021</Text>
-                        </View>
-                    </View>
-                    <View style={styles.icon}>
-                        <Icon name="lock-closed-outline" style={styles.iconStyle}  ></Icon>
-                    </View>
-                </View>
-
                 <View style={styles.mainComponent}>
                     <View style={{ flexDirection: "column" }}>
                         <View style={styles.componentTexts}>
@@ -75,6 +61,8 @@ const styles = StyleSheet.create({
         fontSize: RFPercentage(2),
         color: Color.secondColor,
         textAlignVertical: "bottom",
+        alignSelf: 'flex-end',
+        marginStart: 5,
     },
     horizontalTexts: {
         flexDirection: "row",
@@ -85,11 +73,15 @@ const styles = StyleSheet.create({
     },
     icon: {
         flexDirection: "row",
-        marginStart: 140,
-        alignItems: "center"
+        alignItems: "center",
+        flex: 1,
+        justifyContent: "flex-end",
+        marginEnd: StyleVariables.width * 0.04
     },
     iconStyle: {
         fontSize: RFPercentage(4),
-        color: Color.textColor
+        color: Color.textColor,
+        fontWeight: "bold",
+        textAlign: 'right',
     }
 })
