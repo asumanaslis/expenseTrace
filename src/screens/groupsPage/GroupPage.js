@@ -25,21 +25,6 @@ export default class GroupPage extends Component {
                     </View>
                 </View>
 
-                <View style={styles.mainComponent}>
-                    <View style={{ flexDirection: "column" }}>
-                        <View style={styles.componentTexts}>
-                            <View style={styles.horizontalTexts}>
-                                <Text style={styles.titleText}>Group Title</Text>
-                                <Text style={styles.subtitleText}>Group Subtitle</Text>
-                            </View>
-                            <Text style={styles.dateText}>30/01/2021</Text>
-                        </View>
-                    </View>
-                    <View style={styles.icon}>
-                        <Icon name="lock-closed-outline" style={styles.iconStyle}  ></Icon>
-                    </View>
-                </View>
-
             </View>
         )
     }
