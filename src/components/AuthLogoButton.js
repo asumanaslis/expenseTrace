@@ -3,7 +3,7 @@ Google, Facebook and Apple Buttons for Login and Register screens
 */
 
 import React from "react";
-import { StyleSheet, View, Image, TouchableOpacity } from "react-native";
+import { StyleSheet, Image, TouchableOpacity } from "react-native";
 import * as Google from "expo-google-app-auth";
 import { firebase } from "../firebase/config";
 import * as Facebook from "expo-facebook";

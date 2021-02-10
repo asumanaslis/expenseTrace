@@ -8,9 +8,8 @@ import {
 } from "react-native";
 import { firebase } from "../../firebase/config";
 import AuthButton from "../../components/AuthButton";
-import { customStyles } from "../../styles/customStyles";
 import { navigate } from "../../navigationRef";
-import { BLUE } from "../../styles/colors";
+import { Colors, customStyles } from "../../styles/index";
 
 const background = require("../../../assets/background.png");
 const logo = require("../../../assets/logo.png");
@@ -48,7 +47,7 @@ const WelcomeScreen = ({ navigation }) => {
         {isLoading ? (
           <ActivityIndicator
             size="large"
-            color={BLUE}
+            color={Colors.blue}
             style={customStyles.loadingIndicator}
           />
         ) : null}

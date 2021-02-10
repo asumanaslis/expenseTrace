@@ -1,4 +1,7 @@
-export const BLUE = "#2F52E0";
-export const WHITE = "#E9F1F7";
-export const RED = "#FF0033";
-export const TAB_BAR = "#F4F4F4";
+export const Colors = {
+  blue: "#2F52E0",
+  white: "#E9F1F7",
+  red: "#FF0033",
+  tabBar: "#F4F4F4",
+  lightGrey: "#C4C4C4",
+};

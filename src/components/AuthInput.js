@@ -1,6 +1,6 @@
 import React from "react";
 import { Text, StyleSheet, TextInput, View } from "react-native";
-import { BLUE } from "../styles/colors";
+import { Colors } from "../styles/index";
 
 const AuthInput = ({ inputLabel, ...props }) => {
   return (
@@ -23,13 +23,13 @@ const styles = StyleSheet.create({
   },
   textInput: {
     borderWidth: 1,
-    borderColor: BLUE,
+    borderColor: Colors.blue,
     borderRadius: 10,
     width: "80%",
     height: 35,
   },
   text: {
-    color: BLUE,
+    color: Colors.blue,
     fontSize: 14,
   },
 });

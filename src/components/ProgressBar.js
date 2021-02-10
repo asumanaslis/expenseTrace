@@ -1,8 +1,8 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { RED } from "../styles/colors";
 import { navigate } from "../navigationRef";
+import { Colors } from "../styles/index";
 
 const ProgressBar = ({ data, percentage, nav }) => {
   return (
@@ -14,9 +14,11 @@ const ProgressBar = ({ data, percentage, nav }) => {
     >
       <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
         <Text style={styles.barLabel}>{data.category}</Text>
-        <Text style={{ marginRight: "10%", color: RED }}>-{data.price}₺</Text>
+        <Text style={{ marginRight: "10%", color: Colors.red }}>
+          -{data.price}₺
+        </Text>
       </View>
-      <View style={styles.bar(data.color, percentage)}>
+      <View style={styles.bar(data.color)}>
         <View
           style={{
             position: "absolute",
@@ -34,7 +36,7 @@ const ProgressBar = ({ data, percentage, nav }) => {
 };
 
 const styles = StyleSheet.create({
-  bar: (color, percentage) => {
+  bar: (color) => {
     return {
       alignSelf: "center",
       // backgroundColor: color,

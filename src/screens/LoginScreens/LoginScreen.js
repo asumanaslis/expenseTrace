@@ -7,17 +7,15 @@ import {
   KeyboardAvoidingView,
   Platform,
   ActivityIndicator,
-  Alert,
 } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import AuthLogoButton from "../../components/AuthLogoButton";
 import { firebase } from "../../firebase/config";
-import { WHITE, BLUE } from "../../styles/colors";
 import AuthInput from "../../components/AuthInput";
-import { customStyles } from "../../styles/customStyles";
 import AuthButton from "../../components/AuthButton";
 import { showAlert } from "../../components/ShowAlert";
 import { navigate } from "../../navigationRef";
+import { Colors, customStyles } from "../../styles/index";
 
 const background = require("../../../assets/background.png");
 
@@ -71,7 +69,7 @@ const LoginScreen = () => {
         {isLoading ? (
           <ActivityIndicator
             size="large"
-            color={BLUE}
+            color={Colors.blue}
             style={customStyles.loadingIndicator}
           />
         ) : null}
@@ -132,7 +130,7 @@ const LoginScreen = () => {
               navigate("Register");
             }}
           >
-            <Text style={{ color: WHITE }}>
+            <Text style={{ color: Colors.white }}>
               <Text>New Here? </Text>
               <Text style={{ fontWeight: "700" }}>Register</Text>
             </Text>
@@ -156,7 +154,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   forgotPasswordText: {
-    color: BLUE,
+    color: Colors.blue,
     fontWeight: "700",
     alignSelf: "flex-end",
     width: "40%",

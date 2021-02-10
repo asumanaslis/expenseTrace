@@ -1,32 +1,15 @@
 import React from "react";
 import { View, StyleSheet, Text } from "react-native";
+import { Colors } from "../styles/index";
 
 const ExpenseList = ({ data }) => {
   console.log(data);
   return (
-    <View
-      style={{
-        flexDirection: "row",
-        justifyContent: "space-between",
-        width: "85%",
-        alignItems: "center",
-        borderBottomWidth: 1,
-        borderBottomColor: "#C4C4C4",
-        margin: 5,
-      }}
-    >
+    <View style={styles.container}>
       <View style={{ marginLeft: 5 }}>
         <View style={{ flexDirection: "row" }}>
           <Text style={{ fontSize: 16 }}>Expense Title</Text>
-          <Text
-            style={{
-              fontSize: 8,
-              color: "#C4C4C4",
-              alignSelf: "flex-end",
-            }}
-          >
-            Expense Subtitle
-          </Text>
+          <Text style={styles.subtitle}>Expense Subtitle</Text>
         </View>
         <Text style={{ fontSize: 8 }}>12/12/2020</Text>
       </View>
@@ -35,6 +18,21 @@ const ExpenseList = ({ data }) => {
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    width: "85%",
+    alignItems: "center",
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.lightGrey,
+    margin: 5,
+  },
+  subtitle: {
+    fontSize: 8,
+    color: Colors.lightGrey,
+    alignSelf: "flex-end",
+  },
+});
 
 export default ExpenseList;

@@ -1,12 +1,12 @@
 import { StyleSheet } from "react-native";
-import { BLUE } from "../styles/colors";
+import { Colors } from "../styles/colors";
 
 export const customStyles = StyleSheet.create({
   title: {
     paddingTop: 50,
     fontSize: 36,
     marginLeft: 25,
-    color: BLUE,
+    color: Colors.blue,
     fontWeight: "700",
   },
   loadingIndicator: {

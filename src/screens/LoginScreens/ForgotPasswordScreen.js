@@ -10,7 +10,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import AuthInput from "../../components/AuthInput";
-import { customStyles } from "../../styles/customStyles";
+import { customStyles } from "../../styles/index";
 import AuthButton from "../../components/AuthButton";
 import { firebase } from "../../firebase/config";
 import { showAlert } from "../../components/ShowAlert";

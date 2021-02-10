@@ -1,27 +1,34 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+  Button,
+} from "react-native";
 import ProgressBar from "../../components/ProgressBar";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
 import Bullet from "../../components/Bullet";
-// import { navigate } from "../navigationRef";
-// import { firebase } from "../firebase/config";
+// import { navigate } from "../../navigationRef";
+// import { firebase } from "../../firebase/config";
 
 const PersonalScreen = ({ navigation }) => {
   // const name = navigation.getParam("name");
 
-  // const onLogoutPress = () => {
-  //   firebase
-  //     .auth()
-  //     .signOut()
-  //     .then(() => {
-  //       navigate("Welcome");
-  //     })
-  //     .catch((error) => {
-  //       alert(error);
-  //     });
-  // };
+  // // const onLogoutPress = () => {
+  // //   firebase
+  // //     .auth()
+  // //     .signOut()
+  // //     .then(() => {
+  // //       navigate("Welcome");
+  // //     })
+  // //     .catch((error) => {
+  // //       alert(error);
+  // //     });
+  // // };
 
   // Data of Expenses
   const data = [

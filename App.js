@@ -1,6 +1,5 @@
 import React from "react";
 import { Image } from "react-native";
-import { TAB_BAR } from "./src/styles/colors";
 import { createAppContainer, createSwitchNavigator } from "react-navigation";
 import { createStackNavigator } from "react-navigation-stack";
 import { createBottomTabNavigator } from "react-navigation-tabs";
@@ -16,6 +15,7 @@ import PersonalCategoryScreen from "./src/screens/PersonalScreens/PersonalCatego
 import AllGroupsScreen from "./src/screens/GroupScreens/AllGroupsScreen";
 import GroupMemberScreen from "./src/screens/GroupScreens/GroupMemberScreen";
 import GroupCategoryScreen from "./src/screens/GroupScreens/GroupCategoryScreen";
+import { Colors } from "./src/styles/index";
 
 const PersonalStack = createStackNavigator(
   {
@@ -59,7 +59,6 @@ const AddExpenseStack = createStackNavigator(
   },
   {
     headerMode: "none",
-    mode: "modal",
   }
 );
 
@@ -91,7 +90,7 @@ const switchNavigator = createSwitchNavigator({
               <Image
                 source={img}
                 style={{
-                  backgroundColor: TAB_BAR,
+                  backgroundColor: Colors.tabBar,
                   height: 50,
                   width: 50,
                   resizeMode: "contain",
@@ -122,7 +121,7 @@ const switchNavigator = createSwitchNavigator({
       tabBarOptions: {
         showLabel: false,
         style: {
-          backgroundColor: TAB_BAR,
+          backgroundColor: Colors.tabBar,
           borderTopWidth: 0,
           borderTopLeftRadius: 10,
           borderTopRightRadius: 10,

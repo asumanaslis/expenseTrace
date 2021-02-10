@@ -5,8 +5,8 @@ import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
 import Bullet from "../../components/Bullet";
-import { BLUE } from "../../styles/colors";
 import { navigate } from "../../navigationRef";
+import { Colors } from "../../styles/index";
 
 const GroupScreen = () => {
   const data = [
@@ -211,14 +211,14 @@ const styles = StyleSheet.create({
     marginRight: 20,
     borderWidth: 1,
     borderRadius: 5,
-    borderColor: BLUE,
+    borderColor: Colors.blue,
     width: "40%",
     height: "100%",
   },
   createGroupText: {
     marginTop: "10%",
     marginBottom: "10%",
-    color: BLUE,
+    color: Colors.blue,
     fontSize: 18,
     textAlign: "center",
   },
