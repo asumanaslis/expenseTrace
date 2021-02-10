@@ -102,6 +102,7 @@ const switchNavigator = createSwitchNavigator({
           },
         },
       },
+
       GroupScreen: {
         screen: GroupStack,
         navigationOptions: {
