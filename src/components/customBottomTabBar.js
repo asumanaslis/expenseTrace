@@ -44,7 +44,6 @@ export default class BottomNavigator extends Component {
 
 const styles = StyleSheet.create({
     Main: {
-        flex: 1,
         flexDirection: 'column',
         backgroundColor: Color.secondColor
     },
@@ -55,7 +54,8 @@ const styles = StyleSheet.create({
         height: StyleVariables.width * 0.17,
         borderRadius: 40,
         bottom: StyleVariables.width * 0.09,
-        zIndex: 10
+        zIndex: 10,
+        
     },
     buttonBarSettings: {
         position: 'absolute',
@@ -68,10 +68,11 @@ const styles = StyleSheet.create({
         paddingVertical: StyleVariables.width * 0.010,
         paddingHorizontal: StyleVariables.width * 0.010,
         borderTopEndRadius: StyleVariables.width * 0.050,
-        borderTopStartRadius: StyleVariables.width * 0.050
+        borderTopStartRadius: StyleVariables.width * 0.050,
+        
     },
     MainContainer: {
-        flex: 1,
+   
         justifyContent: 'center',
         alignItems: 'center',
     },
