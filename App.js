@@ -14,6 +14,8 @@ import AddExpenseScreen from "./src/screens/AddExpenseScreen";
 import PersonalCategoryScreen from "./src/screens/PersonalScreens/PersonalCategoryScreen";
 import AllGroupsScreen from "./src/screens/GroupScreens/AllGroupsScreen";
 import GroupMemberScreen from "./src/screens/GroupScreens/GroupMemberScreen";
+import { Provider } from "react-redux";
+import store from "./src/redux/store";
 import GroupCategoryScreen from "./src/screens/GroupScreens/GroupCategoryScreen";
 import { Colors } from "./src/styles/index";
 
@@ -136,5 +138,9 @@ const switchNavigator = createSwitchNavigator({
 const App = createAppContainer(switchNavigator);
 
 export default () => {
-  return <App ref={(navigator) => setNavigator(navigator)} />;
+  return (
+    <Provider store={store}>
+      <App ref={(navigator) => setNavigator(navigator)} />
+    </Provider>
+  );
 };

@@ -11,58 +11,26 @@ import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
 import ExpenseList from "../../components/ExpenseList";
 import { ScrollView } from "react-native-gesture-handler";
+import { useSelector } from "react-redux";
 
 const PersonalCategoryScreen = ({ navigation }) => {
   const category = navigation.state.params.category;
-  const categoryData = [
-    {
-      id: 1,
-      category: category,
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-    {
-      id: 2,
-      category: category,
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-    {
-      id: 3,
-      category: category,
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-    {
-      id: 4,
-      category: category,
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-    {
-      id: 5,
-      category: category,
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-    {
-      id: 6,
-      category: category,
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-    {
-      id: 7,
-      category: category,
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-  ];
+  const getExpensesByCategory = () => {
+    const expenses = useSelector((state) => state);
+    let arr = [];
+    expenses.map((item) => {
+      if (item.category == category) {
+        arr.push(item);
+      }
+    });
+    return arr;
+  };
 
+  const expensesByCategory = getExpensesByCategory();
   const totalPrice = () => {
     var sum = 0;
 
-    categoryData.map((item) => {
+    expensesByCategory.map((item) => {
       sum += item.price;
     });
 
@@ -70,12 +38,12 @@ const PersonalCategoryScreen = ({ navigation }) => {
   };
 
   function renderChartView() {
-    const colorScales = categoryData.map((item) => item.color);
+    const colorScales = expensesByCategory.map((item) => item.color);
 
     return (
       <>
         <VictoryPie
-          data={categoryData}
+          data={expensesByCategory}
           x={"category"}
           y={"price"}
           labels={() => null}
@@ -113,7 +81,7 @@ const PersonalCategoryScreen = ({ navigation }) => {
   }
 
   function renderExpenseList() {
-    return categoryData.map((item) => {
+    return expensesByCategory.map((item) => {
       return <ExpenseList key={item.id} data={item} />;
     });
   }

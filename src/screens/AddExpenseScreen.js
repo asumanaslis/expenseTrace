@@ -5,23 +5,32 @@ import {
   View,
   StatusBar,
   TextInput,
-  KeyboardAvoidingView,
   Keyboard,
-  Dimensions,
 } from "react-native";
+import store from "../redux/store";
+import { expenseAdded } from "../redux/actions";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import BottomSheet from "reanimated-bottom-sheet";
 import { Colors } from "../styles/index";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { dimensions } from "../styles/index";
+import { navigate } from "../navigationRef";
 
 import DropDownPicker from "react-native-dropdown-picker";
 
 const AddExpenseScreen = () => {
   const sheetRef = React.useRef(null);
+  const [categoryType, onChangeCategoryType] = useState("Market");
   const [headerValue, onChangeExpense] = useState("");
   const [categoryValue, onChangeCategory] = useState("");
   const [priceValue, onChangePrice] = useState("");
+
+  const navigateToPersonal = () => {
+    onChangeCategory("");
+    onChangeExpense("");
+    onChangePrice("");
+    navigate("Personal");
+  };
 
   useEffect(() => {
     const keyboardDidShowListener = Keyboard.addListener(
@@ -62,7 +71,7 @@ const AddExpenseScreen = () => {
         style={{ backgroundColor: Colors.lightGrey }}
         dropDownStyle={{ backgroundColor: Colors.lightGrey, fontSize: 30 }}
         labelStyle={{ fontSize: 20, color: "#000000" }}
-        onChangeItem={(item) => console.log(item.label, item.value)}
+        onChangeItem={(item) => onChangeCategoryType(item.label)}
       />
       <View style={{}}>
         <TextInput
@@ -89,6 +98,32 @@ const AddExpenseScreen = () => {
           </View>
         </View>
       </View>
+      <View style={{ alignItems: "center" }}>
+        <TouchableOpacity
+          style={{
+            height: 50,
+            borderRadius: 5,
+            backgroundColor: Colors.lightGrey,
+            marginTop: 50,
+            width: 220,
+            alignItems: "center",
+          }}
+          onPress={() => {
+            const expense = {
+              category: categoryType,
+              title: headerValue,
+              subtitle: categoryValue,
+              price: parseInt(priceValue),
+            };
+            store.dispatch(expenseAdded(expense));
+            navigateToPersonal();
+          }}
+        >
+          <Text style={{ fontSize: 25, textAlign: "center", top: 12 }}>
+            Add
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
@@ -106,7 +141,7 @@ const AddExpenseScreen = () => {
         <BottomSheet
           ref={sheetRef}
           initialSnap={0}
-          snapPoints={["55%", "70%"]}
+          snapPoints={["65%", "85%"]}
           borderRadius={10}
           renderContent={renderContent}
           enabledContentTapInteraction={false}

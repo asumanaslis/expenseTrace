@@ -9,15 +9,18 @@ import {
 } from "react-native";
 import ProgressBar from "../../components/ProgressBar";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
-import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
 import Bullet from "../../components/Bullet";
 // import { navigate } from "../../navigationRef";
 // import { firebase } from "../../firebase/config";
+import { useSelector } from "react-redux";
 
 const PersonalScreen = ({ navigation }) => {
   // const name = navigation.getParam("name");
 
+  const expenses = useSelector((state) => state);
+
+  // Logging Out
   // // const onLogoutPress = () => {
   // //   firebase
   // //     .auth()
@@ -30,52 +33,10 @@ const PersonalScreen = ({ navigation }) => {
   // //     });
   // // };
 
-  // Data of Expenses
-  const data = [
-    {
-      id: 1,
-      category: "Yeme-İçme",
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-    {
-      id: 2,
-      category: "Market",
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-
-    {
-      id: 3,
-      category: "Eğlence",
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-    {
-      id: 4,
-      category: "Genel",
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-
-    {
-      id: 5,
-      category: "Hediyeler",
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-    {
-      id: 6,
-      category: "Tatil",
-      price: Math.floor(Math.random() * 1000) + 1,
-      color: randomColor(),
-    },
-  ];
-
   const totalPrice = () => {
     var sum = 0;
 
-    data.map((item) => {
+    expenses.map((item) => {
       sum += item.price;
     });
 
@@ -83,7 +44,7 @@ const PersonalScreen = ({ navigation }) => {
   };
 
   function renderProgressBar() {
-    return data.map((item) => {
+    return expenses.map((item) => {
       const expensePercentage = (item.price / totalPrice()) * 100;
       return (
         <ProgressBar
@@ -97,7 +58,7 @@ const PersonalScreen = ({ navigation }) => {
   }
 
   function renderBullets() {
-    return data.map((item) => {
+    return expenses.map((item) => {
       let expensePercentage = (item.price / totalPrice()) * 100;
       return (
         <Bullet
@@ -109,18 +70,18 @@ const PersonalScreen = ({ navigation }) => {
     });
   }
   function renderChartView() {
-    const colorScales = data.map((item) => item.color);
+    const colorScales = expenses.map((item) => item.color);
 
     return (
       <>
         <VictoryPie
-          data={data}
+          data={expenses}
           x={"category"}
           y={"price"}
           labels={() => null}
           innerRadius={70}
           animate={{
-            duration: 2000,
+            duration: 1000,
           }}
           style={{
             parent: {
