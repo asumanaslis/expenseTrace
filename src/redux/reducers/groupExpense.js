@@ -1,11 +1,11 @@
-import * as actions from "./actionTypes";
+import * as actions from "../actionTypes";
 import randomColor from "randomcolor";
 
 let lastId = 0;
 
-export default function reducer(state = [], action) {
+export default function groupExpense(state = [], action) {
   switch (action.type) {
-    case actions.EXPENSE_ADDED:
+    case actions.GR_EXPENSE_ADDED:
       return [
         ...state,
         {
@@ -15,6 +15,7 @@ export default function reducer(state = [], action) {
           categorySubtitle: action.payload.subtitle,
           price: action.payload.price,
           color: randomColor(),
+          date: new Date(),
         },
       ];
 

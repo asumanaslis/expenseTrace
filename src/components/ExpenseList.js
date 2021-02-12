@@ -3,6 +3,13 @@ import { View, StyleSheet, Text } from "react-native";
 import { Colors } from "../styles/index";
 
 const ExpenseList = ({ data }) => {
+  const getDate = () => {
+    var day = data.date.getDate();
+    var month = data.date.getMonth();
+    var year = data.date.getFullYear();
+
+    return day + "/" + month + "/" + year;
+  };
   return (
     <View style={styles.container}>
       <View style={{ marginLeft: 5 }}>
@@ -10,7 +17,7 @@ const ExpenseList = ({ data }) => {
           <Text style={{ fontSize: 16 }}>{data.expenseTitle}</Text>
           <Text style={styles.subtitle}>{data.categorySubtitle}</Text>
         </View>
-        <Text style={{ fontSize: 8 }}>12/12/2020</Text>
+        <Text style={{ fontSize: 8 }}>{getDate()}</Text>
       </View>
       <Text>{data.price}₺</Text>
     </View>

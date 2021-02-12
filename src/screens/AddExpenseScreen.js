@@ -8,28 +8,47 @@ import {
   Keyboard,
 } from "react-native";
 import store from "../redux/store";
-import { expenseAdded } from "../redux/actions";
+import { perExpenseAdded, grExpenseAdded } from "../redux/actions";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import BottomSheet from "reanimated-bottom-sheet";
 import { Colors } from "../styles/index";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 import { dimensions } from "../styles/index";
 import { navigate } from "../navigationRef";
-
 import DropDownPicker from "react-native-dropdown-picker";
+import { useSelector } from "react-redux";
 
-const AddExpenseScreen = () => {
+const AddExpenseScreen = (props) => {
   const sheetRef = React.useRef(null);
   const [categoryType, onChangeCategoryType] = useState("Market");
   const [headerValue, onChangeExpense] = useState("");
   const [categoryValue, onChangeCategory] = useState("");
   const [priceValue, onChangePrice] = useState("");
 
-  const navigateToPersonal = () => {
+  const previousScreen = useSelector((state) => state.previousScreen.routeName);
+
+  const clearStates = () => {
     onChangeCategory("");
     onChangeExpense("");
     onChangePrice("");
-    navigate("Personal");
+  };
+
+  const addExpense = () => {
+    const expense = {
+      category: categoryType,
+      title: headerValue,
+      subtitle: categoryValue,
+      price: parseInt(priceValue),
+    };
+
+    if (previousScreen === "Personal") {
+      store.dispatch(perExpenseAdded(expense));
+      navigate("Personal");
+    } else if (previousScreen === "Group") {
+      store.dispatch(grExpenseAdded(expense));
+      navigate("Group");
+    }
+    clearStates();
   };
 
   useEffect(() => {
@@ -109,14 +128,7 @@ const AddExpenseScreen = () => {
             alignItems: "center",
           }}
           onPress={() => {
-            const expense = {
-              category: categoryType,
-              title: headerValue,
-              subtitle: categoryValue,
-              price: parseInt(priceValue),
-            };
-            store.dispatch(expenseAdded(expense));
-            navigateToPersonal();
+            addExpense();
           }}
         >
           <Text style={{ fontSize: 25, textAlign: "center", top: 12 }}>

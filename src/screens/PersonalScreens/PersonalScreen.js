@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   View,
   Text,
@@ -14,12 +14,22 @@ import Bullet from "../../components/Bullet";
 // import { navigate } from "../../navigationRef";
 // import { firebase } from "../../firebase/config";
 import { useSelector } from "react-redux";
+import store from "../../redux/store";
+import { navChanged } from "../../redux/actions";
 
 const PersonalScreen = ({ navigation }) => {
+  useEffect(() => {
+    const didFocusSubscription = navigation.addListener("didFocus", () => {
+      store.dispatch(navChanged(navigation.state.routeName));
+    });
+    return () => {
+      didFocusSubscription.remove();
+    };
+  }, []);
+
   // const name = navigation.getParam("name");
 
-  const expenses = useSelector((state) => state);
-
+  const expenses = useSelector((state) => state.personalExpense);
   // Logging Out
   // // const onLogoutPress = () => {
   // //   firebase
@@ -70,12 +80,23 @@ const PersonalScreen = ({ navigation }) => {
     });
   }
   function renderChartView() {
-    const colorScales = expenses.map((item) => item.color);
+    const colorScales = () => {
+      if (expenses.length === 0) {
+        return ["#808080"];
+      } else {
+        console.log(expenses);
+        return expenses.map((item) => item.color);
+      }
+    };
 
     return (
       <>
         <VictoryPie
-          data={expenses}
+          data={
+            expenses.length === 0
+              ? [{ category: "empty", price: 100 }]
+              : expenses
+          }
           x={"category"}
           y={"price"}
           labels={() => null}
@@ -90,7 +111,7 @@ const PersonalScreen = ({ navigation }) => {
           }}
           width={300}
           height={300}
-          colorScale={colorScales}
+          colorScale={colorScales()}
         />
 
         <View style={{ position: "absolute", top: "45%", left: "33%" }}>

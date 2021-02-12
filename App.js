@@ -35,7 +35,7 @@ const PersonalStack = createStackNavigator(
 
 const GroupStack = createStackNavigator(
   {
-    GroupScreen: {
+    Group: {
       screen: GroupScreen,
     },
     AllGroups: {
@@ -61,6 +61,7 @@ const AddExpenseStack = createStackNavigator(
   },
   {
     headerMode: "none",
+    mode: "modal",
   }
 );
 
@@ -105,7 +106,7 @@ const switchNavigator = createSwitchNavigator({
         },
       },
 
-      GroupScreen: {
+      Group: {
         screen: GroupStack,
         navigationOptions: {
           tabBarIcon: () => {
