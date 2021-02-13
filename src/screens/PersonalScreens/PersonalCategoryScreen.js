@@ -11,6 +11,8 @@ import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
 import ExpenseList from "../../components/ExpenseList";
 import { ScrollView } from "react-native-gesture-handler";
+import DropDownPicker from 'react-native-dropdown-picker';
+import { StyleVariables } from "../../styleVariable/StyleVariable";
 
 const PersonalCategoryScreen = ({ navigation }) => {
   const category = navigation.state.params.category;
@@ -129,18 +131,47 @@ const PersonalCategoryScreen = ({ navigation }) => {
           justifyContent: "space-between",
           marginTop: 20,
           width: "50%",
+          flex: 1,
+          zIndex: 99999,
+          maxHeight: 45
         }}
       >
-        <TouchableOpacity>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Ekim </Text>
-            <Image source={require("../../../assets/arrow-down-icon.png")} />
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity>
+
+
+        {      /*  ------------------------------------------------------------------------------------------------------------*/}
+        {/* Month */}
+        <View style={{ flex: 1 }}>
+          <DropDownPicker
+            items={[
+              { label: 'Ocak', value: 1 },
+              { label: 'Şubat', value: 2 },
+              { label: 'Mart', value: 3 },
+              { label: 'Nisan', value: 4 },
+              { label: 'Mayıs', value: 5 },
+              { label: 'Haziran', value: 6 },
+              { label: 'Temmuz', value: 7 },
+              { label: 'Ağustos', value: 8 },
+              { label: 'Eylül', value: 9 },
+              { label: 'Ekim', value: 10 },
+              { label: 'Kasım', value: 11 },
+              { label: 'Aralık', value: 12 },
+            ]}
+            defaultValue={1}
+            containerStyle={{ flex: 1, width: 130, }}
+            style={{ borderWidth: 0, }}
+            dropDownStyle={{ borderWidth: 0, }}
+            labelStyle={{ fontSize: 16, color: "#000000", }}
+            onChangeItem={item => console.log(item.label, item.value)}
+          />
+        </View>
+        {      /*  ------------------------------------------------------------------------------------------------------------*/}
+
+        <TouchableOpacity style={{ top: StyleVariables.height * 0.021 }}>
           <Text>{category}</Text>
         </TouchableOpacity>
+
       </View>
+
       {/* Chart */}
       <View style={{ alignItems: "center" }}>{renderChartView()}</View>
       {/* Expense List */}

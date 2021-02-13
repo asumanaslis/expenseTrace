@@ -1,10 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, Image, SafeAreaView, StatusBar } from "react-native";
 import ProgressBar from "../../components/ProgressBar";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
 import Bullet from "../../components/Bullet";
+import DropDownPicker from 'react-native-dropdown-picker';
+import { StyleVariables } from "../../styleVariable/StyleVariable";
 // import { navigate } from "../navigationRef";
 // import { firebase } from "../firebase/config";
 
@@ -135,54 +137,76 @@ const PersonalScreen = ({ navigation }) => {
   }
 
   return (
-    <SafeAreaView
-      style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
-    >
-      {/* Button For Logging Out */}
-      {/* <Button title="Log Out" onPress={onLogoutPress} /> */}
-      {/* Month Button */}
-      <TouchableOpacity>
-        <View
-          style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}
-        >
-          <Text>Ekim </Text>
-          <Image source={require("../../../assets/arrow-down-icon.png")} />
-        </View>
-      </TouchableOpacity>
+    <>
+      <StatusBar barStyle="dark-content"></StatusBar>
+      <SafeAreaView
+        style={{ alignItems: "center", flex: 1, backgroundColor: "#fff", }}
+      >
+        {/* Button For Logging Out */}
+        {/* <Button title="Log Out" onPress={onLogoutPress} /> */}
 
-      <View style={{ flexDirection: "row" }}>
-        {/* CHART */}
-        <View style={{ flex: 3 / 5, alignItems: "center" }}>
-          {renderChartView()}
+        {      /*  ------------------------------------------------------------------------------------------------------------*/}
+        {/* Month */}
+        <View style={{ flex: 1, maxHeight: 45, zIndex: 99999 }}>
+          <DropDownPicker
+            items={[
+              { label: 'Ocak', value: 1 },
+              { label: 'Şubat', value: 2 },
+              { label: 'Mart', value: 3 },
+              { label: 'Nisan', value: 4 },
+              { label: 'Mayıs', value: 5 },
+              { label: 'Haziran', value: 6 },
+              { label: 'Temmuz', value: 7 },
+              { label: 'Ağustos', value: 8 },
+              { label: 'Eylül', value: 9 },
+              { label: 'Ekim', value: 10 },
+              { label: 'Kasım', value: 11 },
+              { label: 'Aralık', value: 12 },
+            ]}
+            defaultValue={1}
+            containerStyle={{ flex: 1, width: 130, }}
+            style={{ borderWidth: 0, }}
+            dropDownStyle={{ borderWidth: 0, }}
+            labelStyle={{ fontSize: 16, color: "#000000", }}
+            onChangeItem={item => console.log(item.label, item.value)}
+          />
         </View>
-        {/* BULLETS */}
+        {      /*  ------------------------------------------------------------------------------------------------------------*/}
+
+        <View style={{ flexDirection: "row" }}>
+          {/* CHART */}
+          <View style={{ flex: 3 / 5, alignItems: "center" }}>
+            {renderChartView()}
+          </View>
+          {/* BULLETS */}
+          <View
+            style={{
+              flex: 2 / 5,
+              marginLeft: 30,
+              marginTop: 15,
+            }}
+          >
+            {renderBullets()}
+          </View>
+        </View>
+        {/* Main Screen Seperator */}
         <View
           style={{
-            flex: 2 / 5,
-            marginLeft: 30,
-            marginTop: 15,
+            width: "90%",
+            borderTopWidth: 1,
+            borderTopColor: "#F7F7F7",
+            marginBottom: 5,
           }}
+        />
+        {/* Expense Bars */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.barContainer}
         >
-          {renderBullets()}
-        </View>
-      </View>
-      {/* Main Screen Seperator */}
-      <View
-        style={{
-          width: "90%",
-          borderTopWidth: 1,
-          borderTopColor: "#F7F7F7",
-          marginBottom: 5,
-        }}
-      />
-      {/* Expense Bars */}
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.barContainer}
-      >
-        {renderProgressBar()}
-      </ScrollView>
-    </SafeAreaView>
+          {renderProgressBar()}
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 

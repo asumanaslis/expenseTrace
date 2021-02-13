@@ -128,8 +128,6 @@ const GroupScreen = () => {
     );
   }
 
-  const sheetRef = React.useRef(null);
-
   return (
     <SafeAreaView
       style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
@@ -142,6 +140,7 @@ const GroupScreen = () => {
           width: "90%",
           justifyContent: "space-between",
           alignItems: "center",
+          zIndex: 99999
         }}
       >
         {/* Create Group Button */}
@@ -157,35 +156,31 @@ const GroupScreen = () => {
 
         {      /*  ------------------------------------------------------------------------------------------------------------*/}
         {/* Month */}
-
         <View style={{ flex: 1 }}>
-
           <DropDownPicker
             items={[
-              { label: 'Ocak', value: '1' },
-              { label: 'Şubat', value: '2' },
-              { label: 'Mart', value: '3' },
-              { label: 'Nisan', value: '4' },
-              { label: 'Mayıs', value: '5' },
-              { label: 'Haziran', value: '6' },
-              { label: 'Temmuz', value: '7' },
-              { label: 'Ağustos', value: '8' },
-              { label: 'Eylül', value: '9' },
-              { label: 'Ekim', value: '10' },
-              { label: 'Kasım', value: '11' },
-              { label: 'Aralık', value: '12' },
+              { label: 'Ocak', value: 1 },
+              { label: 'Şubat', value: 2 },
+              { label: 'Mart', value: 3 },
+              { label: 'Nisan', value: 4 },
+              { label: 'Mayıs', value: 5 },
+              { label: 'Haziran', value: 6 },
+              { label: 'Temmuz', value: 7 },
+              { label: 'Ağustos', value: 8 },
+              { label: 'Eylül', value: 9 },
+              { label: 'Ekim', value: 10 },
+              { label: 'Kasım', value: 11 },
+              { label: 'Aralık', value: 12 },
             ]}
-            defaultIndex={1}
-            containerStyle={{ flex: 1, width: 130, zIndex: 999 }}
-            style={{ borderWidth: 0 }}
-            dropDownStyle={{ borderWidth: 0 }}
-            labelStyle={{ fontSize: 16, color: "#000000" }}
+            defaultValue={1}
+            containerStyle={{ flex: 1, width: 130, }}
+            style={{ borderWidth: 0, }}
+            dropDownStyle={{ borderWidth: 0, }}
+            labelStyle={{ fontSize: 16, color: "#000000", }}
             onChangeItem={item => console.log(item.label, item.value)}
-
           />
-
-          {      /*  ------------------------------------------------------------------------------------------------------------*/}
         </View>
+        {      /*  ------------------------------------------------------------------------------------------------------------*/}
 
 
 

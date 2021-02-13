@@ -6,6 +6,7 @@ import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
 import Bullet from "../../components/Bullet";
 import { BLUE } from "../../styles/colors";
+import DropDownPicker from 'react-native-dropdown-picker';
 
 import { ModalPicker } from "../../components/Picker"
 
@@ -129,22 +130,43 @@ const GroupScreen = () => {
         {/* Container: Create Group, Month and Group Buttons */}
         <View
           style={{
+            flex: 1,
             flexDirection: "row",
-            marginTop: 20,
-            width: "50%",
+            width: "70%",
             justifyContent: "space-between",
             alignItems: "center",
+            zIndex: 99999,
+            maxHeight: 45
           }}
         >
+          {      /*  ------------------------------------------------------------------------------------------------------------*/}
           {/* Month */}
-          <TouchableOpacity
-          >
-            <View style={{ flexDirection: "row", alignItems: "center" }}>
-              <Text>Eylül </Text>
-              <Image source={require("../../../assets/arrow-down-icon.png")} />
-            </View>
+          <View style={{}}>
+            <DropDownPicker
+              items={[
+                { label: 'Ocak', value: 1 },
+                { label: 'Şubat', value: 2 },
+                { label: 'Mart', value: 3 },
+                { label: 'Nisan', value: 4 },
+                { label: 'Mayıs', value: 5 },
+                { label: 'Haziran', value: 6 },
+                { label: 'Temmuz', value: 7 },
+                { label: 'Ağustos', value: 8 },
+                { label: 'Eylül', value: 9 },
+                { label: 'Ekim', value: 10 },
+                { label: 'Kasım', value: 11 },
+                { label: 'Aralık', value: 12 },
+              ]}
+              defaultValue={1}
+              containerStyle={{ flex: 1, width: 100, }}
+              style={{ borderWidth: 0, }}
+              dropDownStyle={{ borderWidth: 0, }}
+              labelStyle={{ fontSize: 16, color: "#000000", }}
+              onChangeItem={item => console.log(item.label, item.value)}
+            />
+          </View>
+          {      /*  ------------------------------------------------------------------------------------------------------------*/}
 
-          </TouchableOpacity>
 
           {/* Group */}
           <TouchableOpacity>

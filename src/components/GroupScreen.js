@@ -147,7 +147,7 @@ const GroupScreen = () => {
         {/* Month */}
         <TouchableOpacity>
           <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Ekim </Text>
+            <Text>asdasddasasd </Text>
             <Image source={require("../../../assets/arrow-down-icon.png")} />
           </View>
         </TouchableOpacity>
