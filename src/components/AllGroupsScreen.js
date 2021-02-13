@@ -2,6 +2,7 @@ import React from "react";
 import { Text, StyleSheet, SafeAreaView } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import GroupList from "../../components/GroupList";
+import { StyleVariables } from "../styleVariable/StyleVariable"
 
 const AllGroupsScreen = () => {
   return (
@@ -24,7 +25,7 @@ const AllGroupsScreen = () => {
 
 const styles = StyleSheet.create({
   scrollView: {
-    marginTop: 10,
+    marginTop: StyleVariables.width * 0.01,
     width: "90%",
     flex: 1,
   },

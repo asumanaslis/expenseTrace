@@ -1,5 +1,5 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Image, SafeAreaView, Picker } from "react-native";
 import ProgressBar from "../../components/ProgressBar";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import randomColor from "randomcolor";
@@ -7,6 +7,13 @@ import { VictoryPie } from "victory-native";
 import Bullet from "../../components/Bullet";
 import { BLUE } from "../../styles/colors";
 import { navigate } from "../../navigationRef";
+import { StyleVariables } from "../../styleVariable/StyleVariable"
+import { RFPercentage, RFValue } from "react-native-responsive-fontsize";
+import { StatusBar } from "expo-status-bar";
+import DropDownPicker from 'react-native-dropdown-picker';
+import Icon from 'react-native-vector-icons/Feather';
+import { Color } from "../../assets/colors";
+
 
 const GroupScreen = () => {
   const data = [
@@ -91,6 +98,8 @@ const GroupScreen = () => {
 
     return (
       <>
+        <StatusBar barStyle="dark-content"></StatusBar>
+
         <VictoryPie
           data={data}
           x={"category"}
@@ -111,13 +120,15 @@ const GroupScreen = () => {
         />
 
         <View style={{ position: "absolute", top: "45%", left: "33%" }}>
-          <Text style={{ textAlign: "center", fontSize: 28, color: "#FFBA08" }}>
+          <Text style={{ textAlign: "center", fontSize: RFPercentage(5), color: "#FFBA08" }}>
             {totalPrice()}₺
           </Text>
         </View>
       </>
     );
   }
+
+  const sheetRef = React.useRef(null);
 
   return (
     <SafeAreaView
@@ -127,7 +138,7 @@ const GroupScreen = () => {
       <View
         style={{
           flexDirection: "row",
-          marginTop: 20,
+          marginTop: StyleVariables.height * 0.035,
           width: "90%",
           justifyContent: "space-between",
           alignItems: "center",
@@ -144,13 +155,39 @@ const GroupScreen = () => {
           </TouchableOpacity>
         </View>
 
+        {      /*  ------------------------------------------------------------------------------------------------------------*/}
         {/* Month */}
-        <TouchableOpacity>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Ekim </Text>
-            <Image source={require("../../../assets/arrow-down-icon.png")} />
-          </View>
-        </TouchableOpacity>
+
+        <View style={{ flex: 1 }}>
+
+          <DropDownPicker
+            items={[
+              { label: 'Ocak', value: '1' },
+              { label: 'Şubat', value: '2' },
+              { label: 'Mart', value: '3' },
+              { label: 'Nisan', value: '4' },
+              { label: 'Mayıs', value: '5' },
+              { label: 'Haziran', value: '6' },
+              { label: 'Temmuz', value: '7' },
+              { label: 'Ağustos', value: '8' },
+              { label: 'Eylül', value: '9' },
+              { label: 'Ekim', value: '10' },
+              { label: 'Kasım', value: '11' },
+              { label: 'Aralık', value: '12' },
+            ]}
+            defaultIndex={1}
+            containerStyle={{ flex: 1, width: 130, zIndex: 999 }}
+            style={{ borderWidth: 0 }}
+            dropDownStyle={{ borderWidth: 0 }}
+            labelStyle={{ fontSize: 16, color: "#000000" }}
+            onChangeItem={item => console.log(item.label, item.value)}
+
+          />
+
+          {      /*  ------------------------------------------------------------------------------------------------------------*/}
+        </View>
+
+
 
         {/* Group */}
         <TouchableOpacity
@@ -174,8 +211,8 @@ const GroupScreen = () => {
         <View
           style={{
             flex: 2 / 5,
-            marginLeft: 30,
-            marginTop: 15,
+            marginLeft: StyleVariables.width * 0.02,
+            marginTop: StyleVariables.height * 0.03,
           }}
         >
           {renderBullets()}
@@ -187,7 +224,7 @@ const GroupScreen = () => {
           width: "90%",
           borderTopWidth: 1,
           borderTopColor: "#F7F7F7",
-          marginBottom: 5,
+          marginBottom: StyleVariables.height * 0.01,
         }}
       />
       {/* Expense Bars */}
@@ -203,12 +240,12 @@ const GroupScreen = () => {
 
 const styles = StyleSheet.create({
   barContainer: {
-    marginTop: 10,
+    marginTop: StyleVariables.height * 0.01,
     width: "90%",
     flex: 1,
   },
   createGroupContainer: {
-    marginRight: 20,
+    marginRight: StyleVariables.width * 0.02,
     borderWidth: 1,
     borderRadius: 5,
     borderColor: BLUE,
@@ -219,7 +256,7 @@ const styles = StyleSheet.create({
     marginTop: "10%",
     marginBottom: "10%",
     color: BLUE,
-    fontSize: 18,
+    fontSize: RFPercentage(2.5),
     textAlign: "center",
   },
 });

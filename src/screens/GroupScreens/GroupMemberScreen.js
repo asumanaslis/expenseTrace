@@ -1,11 +1,13 @@
-import React from "react";
-import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, Image, SafeAreaView, Modal, StatusBar } from "react-native";
 import ProgressBar from "../../components/ProgressBar";
 import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
 import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
 import Bullet from "../../components/Bullet";
 import { BLUE } from "../../styles/colors";
+
+import { ModalPicker } from "../../components/Picker"
 
 const GroupScreen = () => {
   const data = [
@@ -119,69 +121,74 @@ const GroupScreen = () => {
   }
 
   return (
-    <SafeAreaView
-      style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
-    >
-      {/* Container: Create Group, Month and Group Buttons */}
-      <View
-        style={{
-          flexDirection: "row",
-          marginTop: 20,
-          width: "50%",
-          justifyContent: "space-between",
-          alignItems: "center",
-        }}
+    <>
+      <StatusBar barStyle="dark-content"></StatusBar>
+      <SafeAreaView
+        style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
       >
-        {/* Month */}
-        <TouchableOpacity>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Ekim </Text>
-            <Image source={require("../../../assets/arrow-down-icon.png")} />
-          </View>
-        </TouchableOpacity>
-
-        {/* Group */}
-        <TouchableOpacity>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Group Member 1</Text>
-            <Image source={require("../../../assets/arrow-down-icon.png")} />
-          </View>
-        </TouchableOpacity>
-      </View>
-
-      <View style={{ flexDirection: "row" }}>
-        {/* CHART */}
-        <View style={{ flex: 3 / 5, alignItems: "center" }}>
-          {renderChartView()}
-        </View>
-        {/* BULLETS */}
+        {/* Container: Create Group, Month and Group Buttons */}
         <View
           style={{
-            flex: 2 / 5,
-            marginLeft: 30,
-            marginTop: 15,
+            flexDirection: "row",
+            marginTop: 20,
+            width: "50%",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
-          {renderBullets()}
+          {/* Month */}
+          <TouchableOpacity
+          >
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text>Eylül </Text>
+              <Image source={require("../../../assets/arrow-down-icon.png")} />
+            </View>
+
+          </TouchableOpacity>
+
+          {/* Group */}
+          <TouchableOpacity>
+            <View style={{ flexDirection: "row", alignItems: "center" }}>
+              <Text>Group Member 1</Text>
+              <Image source={require("../../../assets/arrow-down-icon.png")} />
+            </View>
+          </TouchableOpacity>
         </View>
-      </View>
-      {/* Main Screen Seperator */}
-      <View
-        style={{
-          width: "90%",
-          borderTopWidth: 1,
-          borderTopColor: "#F7F7F7",
-          marginBottom: 5,
-        }}
-      />
-      {/* Expense Bars */}
-      <ScrollView
-        showsVerticalScrollIndicator={false}
-        style={styles.barContainer}
-      >
-        {renderProgressBar()}
-      </ScrollView>
-    </SafeAreaView>
+
+        <View style={{ flexDirection: "row" }}>
+          {/* CHART */}
+          <View style={{ flex: 3 / 5, alignItems: "center" }}>
+            {renderChartView()}
+          </View>
+          {/* BULLETS */}
+          <View
+            style={{
+              flex: 2 / 5,
+              marginLeft: 30,
+              marginTop: 15,
+            }}
+          >
+            {renderBullets()}
+          </View>
+        </View>
+        {/* Main Screen Seperator */}
+        <View
+          style={{
+            width: "90%",
+            borderTopWidth: 1,
+            borderTopColor: "#F7F7F7",
+            marginBottom: 5,
+          }}
+        />
+        {/* Expense Bars */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          style={styles.barContainer}
+        >
+          {renderProgressBar()}
+        </ScrollView>
+      </SafeAreaView>
+    </>
   );
 };
 
