@@ -16,6 +16,7 @@ import { Color } from "../../assets/colors";
 
 
 const GroupScreen = () => {
+  const [value, setValue] = useState(null);
   const data = [
     {
       id: 1,
@@ -175,12 +176,14 @@ const GroupScreen = () => {
               { label: 'Kasım', value: '11' },
               { label: 'Aralık', value: '12' },
             ]}
-            defaultIndex={1}
-            containerStyle={{ flex: 1, width: 130, zIndex: 999 }}
+            defaultValue={'1'}
+            containerStyle={{ flex: 1, width: 130 }}
             style={{ borderWidth: 0 }}
             dropDownStyle={{ borderWidth: 0 }}
             labelStyle={{ fontSize: 16, color: "#000000" }}
-            onChangeItem={item => console.log(item.label, item.value)}
+            onChangeItem={items => setValue(items.value)}
+            itemStyle={{justifyContent: 'center'}}
+            
 
           />
 
