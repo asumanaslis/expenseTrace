@@ -22,7 +22,7 @@ const AllGroupsScreen = ({ navigation }) => {
 
   function renderGroupList() {
     return groups.map((item) => {
-      return <GroupList group={item} />;
+      return <GroupList key={item.groupID} group={item} />;
     });
   }
   return (
