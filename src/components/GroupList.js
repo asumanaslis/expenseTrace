@@ -5,17 +5,17 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { navigate } from "../navigationRef";
 import { Colors } from "../styles/index";
 
-const GroupList = () => {
+const GroupList = ({ group }) => {
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
-        navigate("GroupScreen");
+        navigate("Group");
       }}
     >
       <View style={{ marginLeft: 5 }}>
         <View style={{ flexDirection: "row" }}>
-          <Text style={{ fontSize: 16 }}>Group Title</Text>
+          <Text style={{ fontSize: 16 }}>{group.groupName}</Text>
           <Text style={styles.subtitle}>Group Subtitle</Text>
         </View>
         <Text style={{ fontSize: 8 }}>12/12/2020</Text>

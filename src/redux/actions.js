@@ -26,3 +26,23 @@ export const grExpenseAdded = (description) => ({
     price: description.price,
   },
 });
+
+export const setCurrentUser = (description) => ({
+  type: actions.SET_CURRENT_USER,
+  payload: {
+    email: description.email,
+    name: description.name,
+    id: description.id,
+  },
+});
+
+export const groupCreated = (description) => ({
+  type: actions.GROUP_CREATED,
+  payload: {
+    groupID: description.groupID,
+    groupName: description.groupName,
+    groupMembers: description.groupMembers,
+    groupPassword: description.groupPassword,
+    expenses: description.expenses,
+  },
+});

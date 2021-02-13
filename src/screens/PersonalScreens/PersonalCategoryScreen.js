@@ -22,7 +22,6 @@ const PersonalCategoryScreen = ({ navigation }) => {
         arr.push(item);
       }
     });
-    console.log(expenses);
     return arr;
   };
 

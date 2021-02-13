@@ -18,6 +18,8 @@ import { Provider } from "react-redux";
 import store from "./src/redux/store";
 import GroupCategoryScreen from "./src/screens/GroupScreens/GroupCategoryScreen";
 import { Colors } from "./src/styles/index";
+import CreateGroupScreen from "./src/screens/GroupScreens/CreateGroupScreen";
+import JoinGroupScreen from "./src/screens/GroupScreens/JoinGroupScreen";
 
 const PersonalStack = createStackNavigator(
   {
@@ -35,17 +37,24 @@ const PersonalStack = createStackNavigator(
 
 const GroupStack = createStackNavigator(
   {
-    Group: {
-      screen: GroupScreen,
-    },
     AllGroups: {
       screen: AllGroupsScreen,
     },
+    Group: {
+      screen: GroupScreen,
+    },
+
     GroupMember: {
       screen: GroupMemberScreen,
     },
     GroupCategory: {
       screen: GroupCategoryScreen,
+    },
+    CreateGroup: {
+      screen: CreateGroupScreen,
+    },
+    JoinGroup: {
+      screen: JoinGroupScreen,
     },
   },
   {
@@ -106,7 +115,7 @@ const switchNavigator = createSwitchNavigator({
         },
       },
 
-      Group: {
+      AllGroups: {
         screen: GroupStack,
         navigationOptions: {
           tabBarIcon: () => {

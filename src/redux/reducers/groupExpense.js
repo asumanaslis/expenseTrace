@@ -18,6 +18,17 @@ export default function groupExpense(state = [], action) {
           date: new Date(),
         },
       ];
+    case actions.GROUP_CREATED:
+      return [
+        ...state,
+        {
+          groupID: action.payload.groupID,
+          groupName: action.payload.groupName,
+          groupMembers: action.payload.groupMembers,
+          groupPassword: action.payload.groupPassword,
+          expenses: action.payload.expenses,
+        },
+      ];
 
     default:
       return state;

@@ -15,9 +15,11 @@ import Bullet from "../../components/Bullet";
 // import { firebase } from "../../firebase/config";
 import { useSelector } from "react-redux";
 import store from "../../redux/store";
-import { navChanged } from "../../redux/actions";
+import { navChanged, setCurrentUser } from "../../redux/actions";
 
 const PersonalScreen = ({ navigation }) => {
+  store.dispatch(setCurrentUser(navigation.state.params)); // Sets current users name, email and id
+
   useEffect(() => {
     const didFocusSubscription = navigation.addListener("didFocus", () => {
       store.dispatch(navChanged(navigation.state.routeName));
@@ -27,8 +29,6 @@ const PersonalScreen = ({ navigation }) => {
     };
   }, []);
 
-  // const name = navigation.getParam("name");
-
   const expenses = useSelector((state) => state.personalExpense);
   // Logging Out
   // // const onLogoutPress = () => {
@@ -36,6 +36,7 @@ const PersonalScreen = ({ navigation }) => {
   // //     .auth()
   // //     .signOut()
   // //     .then(() => {
+  // Dont forget to delete currentUser state
   // //       navigate("Welcome");
   // //     })
   // //     .catch((error) => {
