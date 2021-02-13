@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   Image,
 } from "react-native";
-import randomColor from "randomcolor";
 import { VictoryPie } from "victory-native";
 import ExpenseList from "../../components/ExpenseList";
 import { ScrollView } from "react-native-gesture-handler";
@@ -16,13 +15,14 @@ import { useSelector } from "react-redux";
 const PersonalCategoryScreen = ({ navigation }) => {
   const category = navigation.state.params.category;
   const getExpensesByCategory = () => {
-    const expenses = useSelector((state) => state);
+    const expenses = useSelector((state) => state.personalExpense);
     let arr = [];
     expenses.map((item) => {
       if (item.category == category) {
         arr.push(item);
       }
     });
+    console.log(expenses);
     return arr;
   };
 
