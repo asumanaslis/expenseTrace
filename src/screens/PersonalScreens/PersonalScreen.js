@@ -3,27 +3,26 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   SafeAreaView,
   Button,
+  TouchableOpacity,
 } from "react-native";
 import ProgressBar from "../../components/ProgressBar";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import { VictoryPie } from "victory-native";
 import Bullet from "../../components/Bullet";
-// import { navigate } from "../../navigationRef";
-// import { firebase } from "../../firebase/config";
+import { navigate } from "../../navigationRef";
+import { firebase } from "../../firebase/config";
 import { useSelector } from "react-redux";
 import store from "../../redux/store";
 import { navChanged, setCurrentUser } from "../../redux/actions";
 import DropDownPicker from "react-native-dropdown-picker";
 
 const PersonalScreen = ({ navigation }) => {
-  store.dispatch(setCurrentUser(navigation.state.params)); // Sets current users name, email and id
-
   useEffect(() => {
     const didFocusSubscription = navigation.addListener("didFocus", () => {
       store.dispatch(navChanged(navigation.state.routeName));
+      store.dispatch(setCurrentUser(navigation.state.params)); // Sets current users name, email and id
     });
     return () => {
       didFocusSubscription.remove();
@@ -31,19 +30,18 @@ const PersonalScreen = ({ navigation }) => {
   }, []);
 
   const expenses = useSelector((state) => state.personalExpense);
-  // Logging Out
-  // // const onLogoutPress = () => {
-  // //   firebase
-  // //     .auth()
-  // //     .signOut()
-  // //     .then(() => {
-  // Dont forget to delete currentUser state
-  // //       navigate("Welcome");
-  // //     })
-  // //     .catch((error) => {
-  // //       alert(error);
-  // //     });
-  // // };
+  // Logging Out - Dont forget to delete currentUser state
+  const onLogoutPress = () => {
+    firebase
+      .auth()
+      .signOut()
+      .then(() => {
+        navigate("Welcome");
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  };
 
   const totalPrice = () => {
     var sum = 0;
@@ -132,29 +130,46 @@ const PersonalScreen = ({ navigation }) => {
       {/* Button For Logging Out */}
       {/* <Button title="Log Out" onPress={onLogoutPress} /> */}
       {/* Month DropDownPicker */}
-      <View style={{ flex: 1, maxHeight: 45, zIndex: 99999 }}>
-        <DropDownPicker
-          items={[
-            { label: "Ocak", value: 1 },
-            { label: "Şubat", value: 2 },
-            { label: "Mart", value: 3 },
-            { label: "Nisan", value: 4 },
-            { label: "Mayıs", value: 5 },
-            { label: "Haziran", value: 6 },
-            { label: "Temmuz", value: 7 },
-            { label: "Ağustos", value: 8 },
-            { label: "Eylül", value: 9 },
-            { label: "Ekim", value: 10 },
-            { label: "Kasım", value: 11 },
-            { label: "Aralık", value: 12 },
-          ]}
-          defaultValue={new Date().getMonth() + 1}
-          containerStyle={{ flex: 1, width: 130 }}
-          style={{ borderWidth: 0 }}
-          dropDownStyle={{ borderWidth: 0 }}
-          labelStyle={{ fontSize: 16, color: "#000000" }}
-          onChangeItem={(item) => console.log(item.label, item.value)}
-        />
+
+      <View
+        style={{
+          flexDirection: "row",
+          marginTop: 20,
+          width: "90%",
+          justifyContent: "space-around",
+          alignItems: "center",
+          zIndex: 99999,
+          minHeight: 50,
+        }}
+      >
+        <View style={{ flex: 1, maxHeight: 45, zIndex: 99999 }}>
+          <DropDownPicker
+            items={[
+              { label: "Ocak", value: 1 },
+              { label: "Şubat", value: 2 },
+              { label: "Mart", value: 3 },
+              { label: "Nisan", value: 4 },
+              { label: "Mayıs", value: 5 },
+              { label: "Haziran", value: 6 },
+              { label: "Temmuz", value: 7 },
+              { label: "Ağustos", value: 8 },
+              { label: "Eylül", value: 9 },
+              { label: "Ekim", value: 10 },
+              { label: "Kasım", value: 11 },
+              { label: "Aralık", value: 12 },
+            ]}
+            defaultValue={new Date().getMonth() + 1}
+            containerStyle={{ flex: 1, width: 130 }}
+            style={{ borderWidth: 0 }}
+            dropDownStyle={{ borderWidth: 0 }}
+            labelStyle={{ fontSize: 16, color: "#000000" }}
+            onChangeItem={(item) => console.log(item.label, item.value)}
+          />
+        </View>
+
+        <TouchableOpacity onPress={onLogoutPress}>
+          <Text style={{ color: "red" }}>Log Out</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={{ flexDirection: "row" }}>

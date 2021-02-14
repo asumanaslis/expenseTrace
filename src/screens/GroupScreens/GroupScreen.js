@@ -11,7 +11,16 @@ import { useSelector } from "react-redux";
 
 const GroupScreen = ({ navigation }) => {
   const groupID = navigation.state.params.groupID;
-  store.dispatch(selectedGroupChanged(groupID));
+
+  useEffect(() => {
+    const didFocusSubscription = navigation.addListener("didFocus", () => {
+      store.dispatch(selectedGroupChanged(groupID));
+    });
+    return () => {
+      didFocusSubscription.remove();
+    };
+  }, []);
+
   const allExpenses = useSelector((state) => state.groupExpense);
   const expenses = () => {
     let groupData = [];
@@ -178,17 +187,6 @@ const GroupScreen = ({ navigation }) => {
             onChangeItem={(item) => console.log(item.label, item.value)}
           />
         </View>
-
-        {/* <TouchableOpacity
-          onPress={() => {
-            navigate("GroupMember");
-          }}
-        >
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Group </Text>
-            <Image source={require("../../../assets/arrow-down-icon.png")} />
-          </View>
-        </TouchableOpacity> */}
       </View>
 
       <View style={{ flexDirection: "row" }}>
