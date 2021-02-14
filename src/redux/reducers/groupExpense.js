@@ -10,9 +10,9 @@ export default function groupExpense(state = [], action) {
         if (item.groupID !== action.payload.groupID) {
           return item;
         } else {
-          return [
+          return {
             ...item,
-            {
+            expenses: item.expenses.concat({
               id: ++lastId,
               category: action.payload.category,
               expenseTitle: action.payload.title,
@@ -20,8 +20,8 @@ export default function groupExpense(state = [], action) {
               price: action.payload.price,
               color: randomColor(),
               date: new Date(),
-            },
-          ];
+            }),
+          };
         }
       });
     case actions.GROUP_CREATED:

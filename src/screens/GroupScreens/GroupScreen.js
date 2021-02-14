@@ -7,12 +7,23 @@ import Bullet from "../../components/Bullet";
 import store from "../../redux/store";
 import { navChanged, selectedGroupChanged } from "../../redux/actions";
 import DropDownPicker from "react-native-dropdown-picker";
+import { useSelector } from "react-redux";
 
 const GroupScreen = ({ navigation }) => {
-  const groupData = navigation.state.params;
-  const expenses = groupData.expenses;
-  store.dispatch(selectedGroupChanged(groupData.groupID));
-  console.log(groupData);
+  const groupID = navigation.state.params.groupID;
+  store.dispatch(selectedGroupChanged(groupID));
+  const allExpenses = useSelector((state) => state.groupExpense);
+  const expenses = () => {
+    let groupData = [];
+    for (let i = 0; i < allExpenses.length; i++) {
+      if (allExpenses[i].groupID == groupID) {
+        groupData = allExpenses[i];
+        break;
+      }
+    }
+
+    return groupData.expenses;
+  };
 
   useEffect(() => {
     const didFocusSubscription = navigation.addListener("didFocus", () => {
@@ -26,7 +37,7 @@ const GroupScreen = ({ navigation }) => {
   const totalPrice = () => {
     var sum = 0;
 
-    expenses.map((item) => {
+    expenses().map((item) => {
       sum += item.price;
     });
 
@@ -34,7 +45,7 @@ const GroupScreen = ({ navigation }) => {
   };
 
   function renderProgressBar() {
-    return expenses.map((item) => {
+    return expenses().map((item) => {
       const expensePercentage = (item.price / totalPrice()) * 100;
       return (
         <ProgressBar
@@ -48,7 +59,7 @@ const GroupScreen = ({ navigation }) => {
   }
 
   function renderBullets() {
-    return expenses.map((item) => {
+    return expenses().map((item) => {
       let expensePercentage = (item.price / totalPrice()) * 100;
       return (
         <Bullet
@@ -61,11 +72,10 @@ const GroupScreen = ({ navigation }) => {
   }
   function renderChartView() {
     const colorScales = () => {
-      if (expenses.length === 0) {
+      if (expenses().length === 0) {
         return ["#808080"];
       } else {
-        console.log(expenses);
-        return expenses.map((item) => item.color);
+        return expenses().map((item) => item.color);
       }
     };
 
@@ -73,16 +83,16 @@ const GroupScreen = ({ navigation }) => {
       <>
         <VictoryPie
           data={
-            expenses.length === 0
+            expenses().length === 0
               ? [{ category: "empty", price: 100 }]
-              : expenses
+              : expenses()
           }
           x={"category"}
           y={"price"}
           labels={() => null}
           innerRadius={70}
           animate={{
-            duration: 2000,
+            duration: 1000,
           }}
           style={{
             parent: {

@@ -27,7 +27,6 @@ const AddExpenseScreen = (props) => {
 
   const previousScreen = useSelector((state) => state.previousScreen.routeName);
   const groupID = useSelector((state) => state.selectedGroup.selectedGroup);
-  console.log(groupID);
   const clearStates = () => {
     onChangeCategory("");
     onChangeExpense("");
