@@ -24,9 +24,11 @@ export default function groupExpense(state = [], action) {
         {
           groupID: action.payload.groupID,
           groupName: action.payload.groupName,
+          groupSubtitle: action.payload.groupSubtitle,
           groupMembers: action.payload.groupMembers,
           groupPassword: action.payload.groupPassword,
           expenses: action.payload.expenses,
+          date: new Date(),
         },
       ];
 

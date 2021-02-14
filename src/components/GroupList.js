@@ -6,19 +6,26 @@ import { navigate } from "../navigationRef";
 import { Colors } from "../styles/index";
 
 const GroupList = ({ group }) => {
+  function getGroupDate() {
+    var day = group.date.getDate();
+    var month = group.date.getMonth() + 1;
+    var year = group.date.getFullYear();
+
+    return day + "/" + month + "/" + year;
+  }
   return (
     <TouchableOpacity
       style={styles.container}
       onPress={() => {
-        navigate("Group");
+        navigate("Group", group);
       }}
     >
       <View style={{ marginLeft: 5 }}>
         <View style={{ flexDirection: "row" }}>
           <Text style={{ fontSize: 16 }}>{group.groupName}</Text>
-          <Text style={styles.subtitle}>Group Subtitle</Text>
+          <Text style={styles.subtitle}>{group.groupSubtitle}</Text>
         </View>
-        <Text style={{ fontSize: 8 }}>12/12/2020</Text>
+        <Text style={{ fontSize: 8 }}>{getGroupDate()}</Text>
       </View>
       <Icon name="lock-closed-outline" style={styles.iconStyle}></Icon>
     </TouchableOpacity>

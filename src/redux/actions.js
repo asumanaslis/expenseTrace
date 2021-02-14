@@ -44,5 +44,6 @@ export const groupCreated = (description) => ({
     groupMembers: description.groupMembers,
     groupPassword: description.groupPassword,
     expenses: description.expenses,
+    groupSubtitle: description.groupSubtitle,
   },
 });

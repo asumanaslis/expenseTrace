@@ -11,6 +11,7 @@ import { useSelector } from "react-redux";
 
 const AllGroupsScreen = ({ navigation }) => {
   const groups = useSelector((state) => state.groupExpense);
+  console.log(groups);
   useEffect(() => {
     const didFocusSubscription = navigation.addListener("didFocus", () => {
       store.dispatch(navChanged(navigation.state.routeName));

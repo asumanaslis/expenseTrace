@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { View, Text, StyleSheet, SafeAreaView, Clipboard } from "react-native";
 import { TextInput, TouchableOpacity } from "react-native-gesture-handler";
 import { Colors } from "../../styles/index";
-import uuid from "react-native-uuid";
+import uuid from "uuid/v4";
 import store from "../../redux/store";
 import { useSelector } from "react-redux";
 import { groupCreated } from "../../redux/actions";
@@ -12,7 +12,8 @@ const CreateGroupScreen = ({ navigation }) => {
   const [groupName, setGroupName] = useState("");
   const [groupPassword, setGroupPassword] = useState("");
   const [isGroupCreated, setIsGroupCreated] = useState(false);
-  const UUID = uuid.v4();
+  const [groupSubtitle, setGroupSubtitle] = useState("");
+  const UUID = uuid();
   const currentUser = useSelector((state) => state.currentUser);
 
   const checkAreInputsValid = () => {
@@ -33,6 +34,7 @@ const CreateGroupScreen = ({ navigation }) => {
       groupID: UUID,
       groupMembers: [currentUser],
       groupPassword,
+      groupSubtitle,
       expenses: [],
     };
     store.dispatch(groupCreated(data));
@@ -40,7 +42,7 @@ const CreateGroupScreen = ({ navigation }) => {
   };
   const renderGroupID = () => {
     return (
-      <View style={{ alignItems: "center" }}>
+      <View style={{ alignItems: "center", flex: 1 }}>
         <Text>Your Group ID is Ready Please Copy It:</Text>
         {/* ID Container */}
         <View
@@ -99,6 +101,7 @@ const CreateGroupScreen = ({ navigation }) => {
       </View>
     );
   };
+
   return (
     <SafeAreaView
       style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
@@ -124,6 +127,29 @@ const CreateGroupScreen = ({ navigation }) => {
           autoCapitalize="none"
           autoCorrect={false}
           onChangeText={(newGroupName) => setGroupName(newGroupName)}
+        />
+      </View>
+
+      {/* Group Subtitle Container */}
+      <Text
+        style={{
+          alignSelf: "flex-start",
+          fontSize: 18,
+          marginLeft: 5,
+          marginTop: 50,
+        }}
+      >
+        Group Subtitle
+      </Text>
+      <View style={styles.inputContainer}>
+        <TextInput
+          editable={!isGroupCreated}
+          placeholder="Group Subtitle"
+          autoCapitalize="none"
+          autoCorrect={false}
+          onChangeText={(newGroupSubtitle) =>
+            setGroupSubtitle(newGroupSubtitle)
+          }
         />
       </View>
 
@@ -190,7 +216,8 @@ const styles = StyleSheet.create({
       height: "7%",
       alignItems: "center",
       justifyContent: "center",
-      margin: 70,
+      marginTop: 20,
+      marginBottom: 20,
       backgroundColor: Colors.blue,
       opacity: isGroupCreated ? 0.2 : 1,
     };
