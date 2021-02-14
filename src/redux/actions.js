@@ -24,6 +24,7 @@ export const grExpenseAdded = (description) => ({
     category: description.category,
     subtitle: description.subtitle,
     price: description.price,
+    groupID: description.groupID,
   },
 });
 
@@ -45,5 +46,12 @@ export const groupCreated = (description) => ({
     groupPassword: description.groupPassword,
     expenses: description.expenses,
     groupSubtitle: description.groupSubtitle,
+  },
+});
+
+export const selectedGroupChanged = (description) => ({
+  type: actions.SELECTED_GROUP_CHANGED,
+  payload: {
+    selectedGroup: description,
   },
 });

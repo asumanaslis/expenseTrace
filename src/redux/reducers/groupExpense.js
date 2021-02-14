@@ -6,18 +6,24 @@ let lastId = 0;
 export default function groupExpense(state = [], action) {
   switch (action.type) {
     case actions.GR_EXPENSE_ADDED:
-      return [
-        ...state,
-        {
-          id: ++lastId,
-          category: action.payload.category,
-          expenseTitle: action.payload.title,
-          categorySubtitle: action.payload.subtitle,
-          price: action.payload.price,
-          color: randomColor(),
-          date: new Date(),
-        },
-      ];
+      return state.map((item) => {
+        if (item.groupID !== action.payload.groupID) {
+          return item;
+        } else {
+          return [
+            ...item,
+            {
+              id: ++lastId,
+              category: action.payload.category,
+              expenseTitle: action.payload.title,
+              categorySubtitle: action.payload.subtitle,
+              price: action.payload.price,
+              color: randomColor(),
+              date: new Date(),
+            },
+          ];
+        }
+      });
     case actions.GROUP_CREATED:
       return [
         ...state,
@@ -36,3 +42,15 @@ export default function groupExpense(state = [], action) {
       return state;
   }
 }
+
+/*
+{
+              id: ++lastId,
+              category: action.payload.category,
+              expenseTitle: action.payload.title,
+              categorySubtitle: action.payload.subtitle,
+              price: action.payload.price,
+              color: randomColor(),
+              date: new Date(),
+            },
+*/

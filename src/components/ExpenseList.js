@@ -5,7 +5,7 @@ import { Colors } from "../styles/index";
 const ExpenseList = ({ data }) => {
   const getDate = () => {
     var day = data.date.getDate();
-    var month = group.date.getMonth() + 1;
+    var month = data.date.getMonth() + 1;
     var year = data.date.getFullYear();
 
     return day + "/" + month + "/" + year;

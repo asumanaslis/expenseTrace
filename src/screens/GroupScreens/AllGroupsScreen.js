@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, StyleSheet, SafeAreaView, View, Button } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import GroupList from "../../components/GroupList";
@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 const AllGroupsScreen = ({ navigation }) => {
   const groups = useSelector((state) => state.groupExpense);
-  console.log(groups);
+
   useEffect(() => {
     const didFocusSubscription = navigation.addListener("didFocus", () => {
       store.dispatch(navChanged(navigation.state.routeName));
@@ -53,14 +53,18 @@ const AllGroupsScreen = ({ navigation }) => {
         {/* Add Group Button */}
         <View style={styles.createGroupContainer}>
           <DropDownPicker
-            placeholder="Add Group" //placeholder çalışmıyor buna bakıcam
+            placeholder="Add Group"
             items={[
               { label: "Create Group", value: "1" },
               { label: "Join Group", value: "2" },
             ]}
-            defaultValue={"1"}
+            defaultValue={null}
             containerStyle={{ flex: 1 }}
-            dropDownStyle={{ borderWidth: 1, borderColor: Colors.blue }}
+            dropDownStyle={{
+              borderWidth: 1,
+              borderColor: Colors.blue,
+              marginTop: 2,
+            }}
             labelStyle={{ fontSize: 16, color: "#000000" }}
             onChangeItem={(items) => {
               if (items.value === "1") {

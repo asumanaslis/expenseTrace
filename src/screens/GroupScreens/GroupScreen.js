@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
-import { View, Text, StyleSheet, Image, SafeAreaView } from "react-native";
+import { View, Text, StyleSheet, SafeAreaView } from "react-native";
 import ProgressBar from "../../components/ProgressBar";
-import { ScrollView, TouchableOpacity } from "react-native-gesture-handler";
+import { ScrollView } from "react-native-gesture-handler";
 import { VictoryPie } from "victory-native";
 import Bullet from "../../components/Bullet";
-import { navigate } from "../../navigationRef";
-import { Colors } from "../../styles/index";
 import store from "../../redux/store";
-import { navChanged } from "../../redux/actions";
-import { useSelector } from "react-redux";
+import { navChanged, selectedGroupChanged } from "../../redux/actions";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const GroupScreen = ({ navigation }) => {
-  const expenses = navigation.state.params.expenses;
+  const groupData = navigation.state.params;
+  const expenses = groupData.expenses;
+  store.dispatch(selectedGroupChanged(groupData.groupID));
+  console.log(groupData);
 
   useEffect(() => {
     const didFocusSubscription = navigation.addListener("didFocus", () => {
@@ -106,7 +107,7 @@ const GroupScreen = ({ navigation }) => {
     <SafeAreaView
       style={{ alignItems: "center", flex: 1, backgroundColor: "#fff" }}
     >
-      {/* Container: Create Group, Month and Group Buttons */}
+      {/* Container: Month and Group DropDownPicker Menus */}
       <View
         style={{
           flexDirection: "row",
@@ -114,29 +115,61 @@ const GroupScreen = ({ navigation }) => {
           width: "90%",
           justifyContent: "space-between",
           alignItems: "center",
+          zIndex: 99999,
+          minHeight: 50,
         }}
       >
-        {/* Create Group Button */}
-        <View style={styles.createGroupContainer}>
-          <TouchableOpacity
-            onPress={() => {
-              navigate("AllGroups");
-            }}
-          >
-            <Text style={styles.createGroupText}>Create Group</Text>
-          </TouchableOpacity>
+        {/* Month */}
+        <View style={{}}>
+          <DropDownPicker
+            items={[
+              { label: "Ocak", value: 1 },
+              { label: "Şubat", value: 2 },
+              { label: "Mart", value: 3 },
+              { label: "Nisan", value: 4 },
+              { label: "Mayıs", value: 5 },
+              { label: "Haziran", value: 6 },
+              { label: "Temmuz", value: 7 },
+              { label: "Ağustos", value: 8 },
+              { label: "Eylül", value: 9 },
+              { label: "Ekim", value: 10 },
+              { label: "Kasım", value: 11 },
+              { label: "Aralık", value: 12 },
+            ]}
+            defaultValue={new Date().getMonth() + 1}
+            containerStyle={{ flex: 1, width: 130 }}
+            style={{ borderWidth: 1 }}
+            dropDownStyle={{ borderWidth: 1 }}
+            labelStyle={{ fontSize: 16, color: "#000000" }}
+            onChangeItem={(item) => console.log(item.label, item.value)}
+            containerStyle={{ flex: 1, width: 130 }}
+            style={{ borderWidth: 0 }}
+            dropDownStyle={{ borderWidth: 0 }}
+            labelStyle={{ fontSize: 16, color: "#000000" }}
+            onChangeItem={(items) => setValue(items.value)}
+            itemStyle={{ justifyContent: "center" }}
+          />
         </View>
 
-        {/* Month */}
-        <TouchableOpacity>
-          <View style={{ flexDirection: "row", alignItems: "center" }}>
-            <Text>Ekim </Text>
-            <Image source={require("../../../assets/arrow-down-icon.png")} />
-          </View>
-        </TouchableOpacity>
-
         {/* Group */}
-        <TouchableOpacity
+
+        <View style={{}}>
+          <DropDownPicker
+            items={[
+              { label: "Group", value: 1 },
+              { label: "Member 1", value: 1 },
+              { label: "Member 2", value: 1 },
+            ]}
+            defaultValue={1}
+            containerStyle={{ flex: 1, width: 130 }}
+            style={{ borderWidth: 0 }}
+            dropDownStyle={{ borderWidth: 0 }}
+            labelStyle={{ fontSize: 16, color: "#000000" }}
+            onChangeItem={(item) => console.log(item.label, item.value)}
+          />
+        </View>
+
+        {/* <TouchableOpacity
           onPress={() => {
             navigate("GroupMember");
           }}
@@ -145,7 +178,7 @@ const GroupScreen = ({ navigation }) => {
             <Text>Group </Text>
             <Image source={require("../../../assets/arrow-down-icon.png")} />
           </View>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
       </View>
 
       <View style={{ flexDirection: "row" }}>
@@ -189,21 +222,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: "90%",
     flex: 1,
-  },
-  createGroupContainer: {
-    marginRight: 20,
-    borderWidth: 1,
-    borderRadius: 5,
-    borderColor: Colors.blue,
-    width: "40%",
-    height: "100%",
-  },
-  createGroupText: {
-    marginTop: "10%",
-    marginBottom: "10%",
-    color: Colors.blue,
-    fontSize: 18,
-    textAlign: "center",
   },
 });
 

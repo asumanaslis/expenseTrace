@@ -16,6 +16,7 @@ import Bullet from "../../components/Bullet";
 import { useSelector } from "react-redux";
 import store from "../../redux/store";
 import { navChanged, setCurrentUser } from "../../redux/actions";
+import DropDownPicker from "react-native-dropdown-picker";
 
 const PersonalScreen = ({ navigation }) => {
   store.dispatch(setCurrentUser(navigation.state.params)); // Sets current users name, email and id
@@ -130,15 +131,31 @@ const PersonalScreen = ({ navigation }) => {
     >
       {/* Button For Logging Out */}
       {/* <Button title="Log Out" onPress={onLogoutPress} /> */}
-      {/* Month Button */}
-      <TouchableOpacity>
-        <View
-          style={{ flexDirection: "row", alignItems: "center", marginTop: 20 }}
-        >
-          <Text>Ekim </Text>
-          <Image source={require("../../../assets/arrow-down-icon.png")} />
-        </View>
-      </TouchableOpacity>
+      {/* Month DropDownPicker */}
+      <View style={{ flex: 1, maxHeight: 45, zIndex: 99999 }}>
+        <DropDownPicker
+          items={[
+            { label: "Ocak", value: 1 },
+            { label: "Şubat", value: 2 },
+            { label: "Mart", value: 3 },
+            { label: "Nisan", value: 4 },
+            { label: "Mayıs", value: 5 },
+            { label: "Haziran", value: 6 },
+            { label: "Temmuz", value: 7 },
+            { label: "Ağustos", value: 8 },
+            { label: "Eylül", value: 9 },
+            { label: "Ekim", value: 10 },
+            { label: "Kasım", value: 11 },
+            { label: "Aralık", value: 12 },
+          ]}
+          defaultValue={new Date().getMonth() + 1}
+          containerStyle={{ flex: 1, width: 130 }}
+          style={{ borderWidth: 0 }}
+          dropDownStyle={{ borderWidth: 0 }}
+          labelStyle={{ fontSize: 16, color: "#000000" }}
+          onChangeItem={(item) => console.log(item.label, item.value)}
+        />
+      </View>
 
       <View style={{ flexDirection: "row" }}>
         {/* CHART */}

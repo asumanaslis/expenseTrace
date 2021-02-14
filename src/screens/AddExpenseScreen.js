@@ -26,7 +26,8 @@ const AddExpenseScreen = (props) => {
   const [priceValue, onChangePrice] = useState("");
 
   const previousScreen = useSelector((state) => state.previousScreen.routeName);
-
+  const groupID = useSelector((state) => state.selectedGroup.selectedGroup);
+  console.log(groupID);
   const clearStates = () => {
     onChangeCategory("");
     onChangeExpense("");
@@ -34,17 +35,23 @@ const AddExpenseScreen = (props) => {
   };
 
   const addExpense = () => {
-    const expense = {
-      category: categoryType,
-      title: headerValue,
-      subtitle: categoryValue,
-      price: parseInt(priceValue),
-    };
-
     if (previousScreen === "Personal") {
+      const expense = {
+        category: categoryType,
+        title: headerValue,
+        subtitle: categoryValue,
+        price: parseInt(priceValue),
+      };
       store.dispatch(perExpenseAdded(expense));
       navigate("Personal");
     } else if (previousScreen === "Group") {
+      const expense = {
+        category: categoryType,
+        title: headerValue,
+        subtitle: categoryValue,
+        price: parseInt(priceValue),
+        groupID,
+      };
       store.dispatch(grExpenseAdded(expense));
       navigate("Group");
     }

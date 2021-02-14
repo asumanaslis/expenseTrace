@@ -3,3 +3,4 @@ export const NAV_CHANGED = "navChanged";
 export const GR_EXPENSE_ADDED = "grExpenseAdded"; // Expense added for groups
 export const SET_CURRENT_USER = "setCurrentUser";
 export const GROUP_CREATED = "groupCreated";
+export const SELECTED_GROUP_CHANGED = "selectedGroupChanged";
